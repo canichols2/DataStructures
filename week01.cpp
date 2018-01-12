@@ -97,13 +97,13 @@ void testSimple()
       cout << "\tEmpty?    " << (v2.empty() ? "Yes" : "No") << endl;
 
       // Test 1.c: copy the Vector using the copy constructor
-      
-      cout << "Create a double Vector using the copy constructor\n";
-      Vector <double> v3(v2);
-      cout << "\tSize:     " << v3.size()                   << endl;
-      cout << "\tCapacity: " << v3.capacity()               << endl;
-      cout << "\tEmpty?    " << (v3.empty() ? "Yes" : "No") << endl;
-
+      {
+         cout << "Create a double Vector using the copy constructor\n";
+         Vector <double> v3(v2);
+         cout << "\tSize:     " << v3.size()                   << endl;
+         cout << "\tCapacity: " << v3.capacity()               << endl;
+         cout << "\tEmpty?    " << (v3.empty() ? "Yes" : "No") << endl;
+      }
 
       // Test 1.d: copy the Vector using the assignment operator
       cout << "Copy a double Vector using the assignment operator\n";
@@ -232,12 +232,8 @@ void testIterate()
       {
          cout << "\t" << v << " > ";
          cin  >> text;
-         if (text != "quit"){
-            std::cout << text << std::endl ;
-            // std::assert(v != nullptr);
+         if (text != "quit")
             v.push_back(text);
-            
-         }
       }
       while (text != "quit");
 

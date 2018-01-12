@@ -1,13 +1,13 @@
 ###############################################################
 # Program:
 #     Week 01, Vector
-#     Brother XXXX, CS235
+#     Brother Ercanbrack, CS235
 # Author:
-#     <your name here>
+#     Cody Nichols
 # Summary:
-#     <put a description here>
+#     Vector Class
 # Time:
-#     <how long did it take to complete this program?>
+#     10 hours?
 ###############################################################
 
 ##############################################################

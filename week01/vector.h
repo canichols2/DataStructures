@@ -43,15 +43,7 @@ public:
    Vector(int capacity) throw (const char *);
    
    // destructor : free everything
-   ~Vector()           { 
-    //    std::cout << "deleting V: [";
-    //    for (int i=0;i<numItems;i++){ 
-    //        std::cout << data[i] << ",";
-    //    }
-    //    std::cout << "]" << std::endl;
-       if (cap) delete [] data; 
-    //    std::cout << "deleting V2: " << this << std::endl;
-    }
+   ~Vector()           { if (cap) delete [] data;       }
    
    // is the vector currently empty
    bool empty() const  { return numItems == 0;         }
@@ -78,9 +70,6 @@ public:
    T& operator[](const int i)const;
    void operator=(const Vector<T>& rhs);
 
-//    Vector<T>& operator=(const Vector<T>& rhs);
-//    friend std::ostream& operator << (std::ostream&, const Vector<T>& );
-   
 private:
    T * data;          // dynamically allocated array of T
    int numItems;      // how many items are currently in the Vector?

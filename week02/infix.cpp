@@ -3,7 +3,7 @@
  *    Week 02, Stack
  *    Brother Helfrich, CS 235
  * Author:
- *    <your name here>
+ *    Cody Nichols
  * Summary:
  *    This program will implement the testInfixToPostfix()
  *    and testInfixToAssembly() functions
@@ -22,7 +22,66 @@ using namespace std;
 string convertInfixToPostfix(const string & infix)
 {
    string postfix;
+   Stack<char> opStack;
+   char  topToken,
+         c;
+   const string BLANK = " ";
 
+   for(int i=0;i<infix.length();i++){
+      c = infix[i];
+
+      switch(c)
+      {
+         case ' ':break;
+         case '(':
+            opStack.push(c);
+            break;
+         case ')':
+            {
+               assert (!opStack.empty());
+               topToken = opStack.top();
+               opStack.pop();
+               if(topToken == '(')
+               break;
+               postfix.append(BLANK + topToken);
+            }
+            break;
+         case '^':
+         case '+':case '-':
+         case '*':case '/':case '%':
+            if(c == '-' && infix[i + 1] != ' ')
+            {
+               //
+            }
+            for(;;)
+            {
+               if(opStack.empty() ||
+                  opStack.top() == '('||
+                  c == '^' ||
+                  ((c == '*' || c == '/' || c == '%') && (opStack.top() == '+' || opStack.top() == '-')) ||
+                  ((c == '+' || c == '-' ) && (opStack.top() != '*' || opStack.top() != '/'|| opStack.top() != '%'))
+               ){
+                  opStack.push(c);
+               }else{
+                  topToken = opStack.top();
+                  opStack.pop();
+                  postfix.append(BLANK + topToken);
+               }
+            }
+            break;
+         default:
+            postfix.append(BLANK + c);
+            for(;;)
+            {
+               char n = infix[i + 1];
+               if( !isalnum(infix[i + 1]))break;
+               i++;
+               c = infix[i];
+               postfix.append(1, c);
+            }
+            break;
+      }
+   }
    return postfix;
 }
 

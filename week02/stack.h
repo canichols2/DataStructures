@@ -184,18 +184,18 @@ Stack <T> :: Stack(int capacity) throw (const char *)
       data[i] = T();
 }
 // the functions I added
-template <class T>
-T& Stack<T>::operator[](const int i){ 
-   if(i > cap || i < 0)
-      throw "ERROR: index out of bounds";
-   return data[i];
-}
-template <class T>
-T& Stack<T>::operator[](const int i)const{ 
-   if(i > cap || i < 0)
-      throw "ERROR: index out of bounds";
-   return data[i];
-}
+// template <class T>
+// T& Stack<T>::operator[](const int i){ 
+//    if(i > cap || i < 0)
+//       throw "ERROR: index out of bounds";
+//    return data[i];
+// }
+// template <class T>
+// T& Stack<T>::operator[](const int i)const{ 
+//    if(i > cap || i < 0)
+//       throw "ERROR: index out of bounds";
+//    return data[i];
+// }
 template <class T>
 void Stack<T>::push(T t)
 {
@@ -255,13 +255,13 @@ void Stack<T>::operator=(const Stack<T> & rhs)
          }
       //  std::cout << numItems << std::endl;
       for(int i=0;i<numItems;i++)
-         data[i] = rhs[i];
+         data[i] = rhs.data[i];
    }
    //   return *this;
 }
 
 template <class T>
-void Stack<T>::pop()
+void Stack<T>::pop() throw (const char *)
 {
    if (numItems){
       numItems--;
@@ -271,14 +271,14 @@ void Stack<T>::pop()
 }
 
 template <class T>
-T& Stack<T>::top()
+T& Stack<T>::top() throw (const char *)
 {
    if (numItems){
-      numItems--;
+      return data[numItems];
+      // numItems--;
    }else{
       throw "ERROR: Unable to reference the element from an empty Stack";
    }
-   return data[numItems];
 }
 #endif // STACK_H
 

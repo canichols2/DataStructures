@@ -11,6 +11,8 @@
 
 #include <iostream>    // for ISTREAM and COUT
 #include <string>      // for STRING
+#include <cstring>     // for isChar
+#include <ctype.h>     // for isChar
 #include <cassert>     // for ASSERT
 #include "stack.h"     // for STACK
 using namespace std;
@@ -58,7 +60,7 @@ string convertInfixToPostfix(const string & infix)
                if(opStack.empty() ||
                   opStack.top() == '('||
                   c == '^' ||
-                  ((c == '*' || c == '/' || c == '%') && (opStack.top() == '+' || opStack.top() == '-')) ||
+                  ((c == '*' || c == '/ ' || c == '%') && (opStack.top() == '+' || opStack.top() == '-')) ||
                   ((c == '+' || c == '-' ) && (opStack.top() != '*' || opStack.top() != '/'|| opStack.top() != '%'))
                ){
                   opStack.push(c);

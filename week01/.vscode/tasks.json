@@ -6,7 +6,7 @@
       {
          "label": "buildCpp",
          "type": "shell",
-         "command": "pwd;g++ -g week02/week*.cpp week02/infix.cpp"
+         "command": "pwd;g++ -g week*.cpp"
       }
    ]
 }

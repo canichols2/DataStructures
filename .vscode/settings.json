@@ -11,5 +11,6 @@
     "string_view": "cpp",
     "iosfwd": "cpp"
 },
+"editor.tabSize": 3,
 
 }

@@ -9,7 +9,7 @@
        "name": "Week02",
        "type": "cppdbg",
        "request": "launch",
-       "program": "c:/projects/datastructures/week02/test.exe",
+       "program": "${workspaceFolder}/week02/test.exe",
        "args": [],
        "stopAtEntry": false,
        "cwd": "${workspaceFolder}/week02",

@@ -76,7 +76,8 @@ int main()
       default:
          cout << "Unrecognized command, exiting...\n";
    }
-
+cout << "test ended sucessfully\n";
+// cin >> choice;
    return 0;
 }
 
@@ -194,7 +195,9 @@ ostream & operator << (ostream & out, Stack <T> rhs) throw (const char *)
    Stack <T> backwards;
    while (!rhs.empty())
    {
-      backwards.push(rhs.top());
+      backwards.push(
+            rhs.top()
+            );
       rhs.pop();
    }
 
@@ -239,13 +242,17 @@ void testPop()
       {
          cout << "\t" << s << " > ";
          cin  >> instruction;
+         cout<< "After CIN:\n";
          switch (instruction)
          {
             case '+':
+               cout << "The word "<<instruction<<" is what is being pushed into the var word\n";
                cin >> word;
+               cout << "The word "<<word<<" is what is being pushed into the stack\n";
                s.push(word);
                break;
             case '-':
+            
                s.pop();
                break;
             case '*':

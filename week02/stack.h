@@ -57,7 +57,7 @@ public:
    void push(T t);
    void pop() throw (const char *);
    T& top() throw (const char *);
-   void operator=(const Stack<T>& rhs);
+   Stack<T>& operator=(const Stack<T>& rhs);
 };
 
 /**************************************************
@@ -236,7 +236,7 @@ void Stack<T>::push(T t)
    data[numItems++] = t;
 }
 template <class T>
-void Stack<T>::operator=(const Stack<T> & rhs)
+Stack<T>& Stack<T>::operator=(const Stack<T> & rhs)
 { 
    //    std::cout << "inside my assignment operator\n";
       if (cap){
@@ -257,7 +257,7 @@ void Stack<T>::operator=(const Stack<T> & rhs)
       for(int i=0;i<numItems;i++)
          data[i] = rhs.data[i];
    }
-   //   return *this;
+     return *this;
 }
 
 template <class T>
@@ -274,8 +274,7 @@ template <class T>
 T& Stack<T>::top() throw (const char *)
 {
    if (numItems){
-      return data[numItems];
-      // numItems--;
+      return data[numItems-1];
    }else{
       throw "ERROR: Unable to reference the element from an empty Stack";
    }

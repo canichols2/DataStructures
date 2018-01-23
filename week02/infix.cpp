@@ -31,7 +31,6 @@ string convertInfixToPostfix(const string & infix)
 
    for(int i=0;i<infix.length();i++){
       c = infix[i];
-
       switch(c)
       {
          case ' ':break;
@@ -39,32 +38,33 @@ string convertInfixToPostfix(const string & infix)
             opStack.push(c);
             break;
          case ')':
+            for(;;)
             {
                assert (!opStack.empty());
                topToken = opStack.top();
                opStack.pop();
-               if(topToken == '(')
-               break;
+               if(topToken == '(') break;
                postfix.append(BLANK + topToken);
             }
             break;
-         case '^':
+         case '^': 
          case '+':case '-':
          case '*':case '/':case '%':
-            if(c == '-' && infix[i + 1] != ' ')
-            {
-               //
-            }
             for(;;)
             {
                if(opStack.empty() ||
                   opStack.top() == '('||
-                  c == '^' ||
-                  ((c == '*' || c == '/ ' || c == '%') && (opStack.top() == '+' || opStack.top() == '-')) ||
-                  ((c == '+' || c == '-' ) && (opStack.top() != '*' || opStack.top() != '/'|| opStack.top() != '%'))
+                  (c == '^') ||
+                  (     (c == '*' || c == '/' || c == '%') 
+                     && (opStack.top() == '+' || opStack.top() == '-') 
+                     && (opStack.top() != '^' ))
+
                ){
                   opStack.push(c);
-               }else{
+                  break;
+               }
+               else
+               {
                   topToken = opStack.top();
                   opStack.pop();
                   postfix.append(BLANK + topToken);
@@ -76,13 +76,27 @@ string convertInfixToPostfix(const string & infix)
             for(;;)
             {
                char n = infix[i + 1];
-               if( !isalnum(infix[i + 1]))break;
+               if( !isalnum(n) )break;
                i++;
                c = infix[i];
                postfix.append(1, c);
             }
-            break;
       }
+   }
+   for(;;)
+   {
+         if (opStack.empty()) break;
+         topToken = opStack.top();
+         opStack.pop();
+         if (topToken != '(')
+         {
+               postfix.append(BLANK + topToken);
+         }
+         else
+         {
+               cout << " *** Error in infix expression ** \n";
+               break;
+         }
    }
    return postfix;
 }

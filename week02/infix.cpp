@@ -76,7 +76,7 @@ string convertInfixToPostfix(const string & infix)
             for(;;)
             {
                char n = infix[i + 1];
-               if( !isalnum(n) )break;
+               if( !isalnum(n) && n!='.' )break;
                i++;
                c = infix[i];
                postfix.append(1, c);

@@ -186,6 +186,11 @@ Stack<T>::Stack(int capacity) throw(const char *)
       data[i] = T();
 }
 // the functions I added
+
+/*****************************************************
+ * Push: 
+ * Add to top of stack
+ *****************************************************/
 template <class T>
 void Stack<T>::push(T t)
 {
@@ -222,6 +227,11 @@ void Stack<T>::push(T t)
    }
    data[numItems++] = t;
 }
+
+/*****************************************************
+ * Assignment Operator Overload
+ * Copy stack to new object
+ *****************************************************/
 template <class T>
 Stack<T> &Stack<T>::operator=(const Stack<T> &rhs)
 {
@@ -247,6 +257,10 @@ Stack<T> &Stack<T>::operator=(const Stack<T> &rhs)
    return *this;
 }
 
+/*****************************************************
+ * pop: 
+ * Remove item from top of stack
+ *****************************************************/
 template <class T>
 void Stack<T>::pop() throw(const char *)
 {
@@ -260,6 +274,10 @@ void Stack<T>::pop() throw(const char *)
    }
 }
 
+/*****************************************************
+ * top: 
+ * Return element reference from top of stack
+ *****************************************************/
 template <class T>
 T &Stack<T>::top() throw(const char *)
 {

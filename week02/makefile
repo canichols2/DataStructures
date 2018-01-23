@@ -1,13 +1,15 @@
 ###############################################################
 # Program:
 #     Week 02, STACK
-#     Brother XXXX, CS235
+#     Brother Ercanbrack, CS235
 # Author:
-#     <your name here>
+#     Cody Nichols
 # Summary:
-#     <put a description here>
+#     Create a custom stack template
+#		and create a function to convert:
+#		1 + 2 * 3 - (Cody - 3) into postfix
 # Time:
-#     <how long did it take to complete this program>?
+#     10 hours
 ###############################################################
 
 ##############################################################

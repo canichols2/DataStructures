@@ -11,15 +11,14 @@
 
 #include <iostream> // for ISTREAM and COUT
 #include <string>   // for STRING
-#include <cstring>  // for isChar
-#include <ctype.h>  // for isChar
+#include <ctype.h>  // for isalnum
 #include <cassert>  // for ASSERT
 #include "stack.h"  // for STACK
 using namespace std;
 
 /*****************************************************
  * CONVERT INFIX TO POSTFIX
- * Convert infix equation "5 + 2" into postifx "5 2 +"
+ * Convert infix equation "5 + 2" into postfix "5 2 +"
  *****************************************************/
 string convertInfixToPostfix(const string &infix)
 {
@@ -34,59 +33,59 @@ string convertInfixToPostfix(const string &infix)
       c = infix[i];
       switch (c)
       {
-      case ' ':
-         break;
-      case '(':
-         opStack.push(c);
-         break;
-      case ')':
-         for (;;)
-         {
-            assert(!opStack.empty());
-            topToken = opStack.top();
-            opStack.pop();
-            if (topToken == '(')
-               break;
-            postfix.append(BLANK + topToken);
-         }
-         break;
-      case '^':
-      case '+':
-      case '-':
-      case '*':
-      case '/':
-      case '%':
-         for (;;)
-         {
-            if (opStack.empty() ||
-                opStack.top() == '(' ||
-                (c == '^') ||
-                ((c == '*' || c == '/' || c == '%') && (opStack.top() == '+' || opStack.top() == '-') && (opStack.top() != '^'))
-
-            )
+         case ' ':
+            break;
+         case '(':
+            opStack.push(c);
+            break;
+         case ')':
+            for (;;)
             {
-               opStack.push(c);
-               break;
-            }
-            else
-            {
+               assert(!opStack.empty());
                topToken = opStack.top();
                opStack.pop();
+               if (topToken == '(')
+                  break;
                postfix.append(BLANK + topToken);
             }
-         }
-         break;
-      default:
-         postfix.append(BLANK + c);
-         for (;;)
-         {
-            char n = infix[i + 1];
-            if (!isalnum(n) && n != '.')
-               break;
-            i++;
-            c = infix[i];
-            postfix.append(1, c);
-         }
+            break;
+         case '^':
+         case '+':
+         case '-':
+         case '*':
+         case '/':
+         case '%':
+            for (;;)
+            {
+               if (opStack.empty() ||
+                  opStack.top() == '(' ||
+                  (c == '^') ||
+                  ((c == '*' || c == '/' || c == '%') && (opStack.top() == '+' || opStack.top() == '-') && (opStack.top() != '^'))
+
+               )
+               {
+                  opStack.push(c);
+                  break;
+               }
+               else
+               {
+                  topToken = opStack.top();
+                  opStack.pop();
+                  postfix.append(BLANK + topToken);
+               }
+            }
+            break;
+         default:
+            postfix.append(BLANK + c);
+            for (;;)
+            {
+               char n = infix[i + 1];
+               if (!isalnum(n) && n != '.')
+                  break;
+               i++;
+               c = infix[i];
+               postfix.append(1, c);
+            }
       }
    }
    for (;;)

@@ -7,9 +7,10 @@
       "PATH": "/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/c/Windows/System32:/c/Windows:/c/Windows/System32/Wbem:/c/Windows/System32/WindowsPowerShell/v1.0/"
    },
 "files.associations": {
-    "iostream": "cpp",
-    "string_view": "cpp",
-    "iosfwd": "cpp"
+   "iostream": "cpp",
+   "string_view": "cpp",
+   "iosfwd": "cpp",
+   "cstring": "cpp"
 },
 "editor.tabSize": 3,
 

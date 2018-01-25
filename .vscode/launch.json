@@ -25,7 +25,7 @@
                "ignoreFailures": true
             }
          ],
-         "preLaunchTask": "buildCppW2",
+         "preLaunchTask": "buildCppW3",
          "internalConsoleOptions": "openOnFirstSessionStart"
       },
 

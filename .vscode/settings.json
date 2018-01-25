@@ -10,7 +10,8 @@
    "iostream": "cpp",
    "string_view": "cpp",
    "iosfwd": "cpp",
-   "cstring": "cpp"
+   "cstring": "cpp",
+   "xstring": "cpp"
 },
 "editor.tabSize": 3,
 

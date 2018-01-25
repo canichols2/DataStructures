@@ -36,11 +36,11 @@ class Queue
    T *data;      // dynamically allocated array of T
    int numItems; // how many items are currently in the Queue?
    int cap;      // how many items can I put on the Queue before full?
-   int front;     // front of the line index
-   int back;      // back of the line index
+   int _front;     // _front of the line index
+   int _back;      // _back of the line index
  public:
    // default constructor : empty and kinda useless
-   Queue() : numItems(0), cap(0), data(NULL) {}
+   Queue() : numItems(0), cap(0),_front(0),_back(0), data(NULL) {}
    // copy constructor : copy it
    Queue(const Queue &rhs) throw(const char *);
    // non-default constructor : pre-allocate
@@ -57,7 +57,6 @@ class Queue
     * function for other not in line function
     *****/
    void clear();
-   void back();
    void push(T t);
    void pop() throw(const char *);
    T &front() throw(const char *);
@@ -76,7 +75,7 @@ Queue<T>::Queue(const Queue<T> &rhs) throw(const char *)
    // do nothing if there is nothing to do
    if (rhs.cap == 0)
    {
-      cap = front = back = numItems = 0;
+      cap = _front = _back = numItems = 0;
       data = NULL;
       return;
    }
@@ -96,11 +95,13 @@ Queue<T>::Queue(const Queue<T> &rhs) throw(const char *)
    assert(rhs.numItems >= 0 && rhs.numItems <= rhs.cap);
    cap = rhs.cap;
    numItems = rhs.numItems;
+   _front = 0;
 
    // copy the items over one at a time using the assignment operator
    for (int i = 0 ; i < numItems; i++){
-      int ri = (i + rhs.front) % rhs.cap;
+      int ri = (i + rhs._front) % rhs.cap;
       data[i] = rhs.data[ri];
+      _back = i;
    }
       
 
@@ -139,6 +140,8 @@ Queue<T>::Queue(int capacity) throw(const char *)
    // initial value stuff
    cap = capacity;
    numItems = 0;
+   _front = 0;
+   _back = 0;
 
    // initialize the queue by calling the default constructor
    for (int i = 0; i < capacity; i++)
@@ -156,6 +159,7 @@ void Queue<T>::push(T t)
    if (cap == 0)
    {
       cap = 1;
+
       // Add 1 to capacity.
       try
       {
@@ -180,13 +184,14 @@ void Queue<T>::push(T t)
          throw "ERROR: Unable to allocate buffer for Queue";
       }
       for (int i = 0; i < numItems; i++){
-         int ri = (i + front) % cap;
+         int ri = (i + _front) % cap;
          temp[i] = data[ri];
       }
       delete[] data;
       data = temp;
    }
-   data[++back] = t;
+   _back = (_back + 1) % cap;
+   data[_back] = t;
    numItems++;
 }
 
@@ -203,8 +208,8 @@ Queue<T> &Queue<T>::operator=(const Queue<T> &rhs)
    }
    numItems = rhs.size();
    cap = rhs.cap;
-   front = 0;
-   back = rhs.numItems-1;
+   _front = 0;
+   _back = rhs.numItems-1;
    if (cap)
    {
       try
@@ -216,9 +221,9 @@ Queue<T> &Queue<T>::operator=(const Queue<T> &rhs)
          throw "ERROR: Unable to allocate buffer for Queue";
       }
       for (int i = 0 ; i < numItems; i++){
-         int ri = (i + rhs.front) % rhs.cap;
+         int ri = (i + rhs._front) % rhs.cap;
          data[i] = rhs.data[ri];
-         back = i;
+         _back = i;
       }
    }
    return *this;
@@ -234,7 +239,7 @@ void Queue<T>::pop() throw(const char *)
    if (numItems)
    {
       numItems--;
-      front = (front + 1)%cap
+      _front = (_front + 1)%cap;
    }
    else
    {
@@ -251,7 +256,7 @@ T &Queue<T>::front() throw(const char *)
 {
    if (numItems)
    {
-      return data[front];
+      return data[_front];
    }
    else
    {
@@ -259,7 +264,7 @@ T &Queue<T>::front() throw(const char *)
    }
 }
 /*****************************************************
- * back: 
+ * _back: 
  * Return element reference from top of queue
  *****************************************************/
 template <class T>
@@ -267,7 +272,7 @@ T &Queue<T>::back() throw(const char *)
 {
    if (numItems)
    {
-      return data[back];
+      return data[_back];
    }
    else
    {
@@ -280,10 +285,10 @@ T &Queue<T>::back() throw(const char *)
  * just left.
  *****************************************************/
 template <class T>
-void clear() 
+void Queue<T>::clear() 
 {
  numItems=0;
- front=0;
- back=0;
+ _front=0;
+ _back=0;
 }
 #endif // QUEUE_H

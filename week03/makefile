@@ -1,13 +1,13 @@
 ###############################################################
 # Program:
 #     Week 03, QUEUE
-#     Brother XXXX, CS235
+#     Brother Ercanbrack, CS235
 # Author:
-#     <your name here>
+#     Cody Nichols
 # Summary:
 #     <put a description here>
 # Time:
-#     <how long did it take to complete this program>?
+#     1.5h making the Queue class
 ###############################################################
 
 ##############################################################

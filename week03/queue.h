@@ -40,7 +40,7 @@ class Queue
    int _back;      // _back of the line index
  public:
    // default constructor : empty and kinda useless
-   Queue() : numItems(0), cap(0),_front(0),_back(0), data(NULL) {}
+   Queue() : numItems(0), cap(0),_front(0),_back(-1), data(NULL) {}
    // copy constructor : copy it
    Queue(const Queue &rhs) throw(const char *);
    // non-default constructor : pre-allocate
@@ -75,7 +75,8 @@ Queue<T>::Queue(const Queue<T> &rhs) throw(const char *)
    // do nothing if there is nothing to do
    if (rhs.cap == 0)
    {
-      cap = _front = _back = numItems = 0;
+      cap = _front = numItems = 0;
+      _back = -1;
       data = NULL;
       return;
    }
@@ -141,7 +142,7 @@ Queue<T>::Queue(int capacity) throw(const char *)
    cap = capacity;
    numItems = 0;
    _front = 0;
-   _back = 0;
+   _back = -1;
 
    // initialize the queue by calling the default constructor
    for (int i = 0; i < capacity; i++)
@@ -289,6 +290,6 @@ void Queue<T>::clear()
 {
  numItems=0;
  _front=0;
- _back=0;
+ _back=-1;
 }
 #endif // QUEUE_H

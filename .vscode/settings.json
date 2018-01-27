@@ -11,7 +11,16 @@
    "string_view": "cpp",
    "iosfwd": "cpp",
    "cstring": "cpp",
-   "xstring": "cpp"
+   "xstring": "cpp",
+   "xutility": "cpp",
+   "ios": "cpp",
+   "system_error": "cpp",
+   "xiosbase": "cpp",
+   "cassert": "cpp",
+   "string": "cpp",
+   "xlocale": "cpp",
+   "ostream": "cpp",
+   "istream": "cpp"
 },
 "editor.tabSize": 3,
 

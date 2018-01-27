@@ -44,11 +44,12 @@ void stocksBuySell()
    string option,countString,valueString;
    Queue<transaction> buyQueue = Queue<transaction>();
    Queue<transaction> sellQueue = Queue<transaction>();
-   option = getWord(cin);
+   // option = getWord(cin);
    for(;;){
       option = "";
       cout << "> ";
-      option = getWord(cin);
+      // option = getWord(cin);
+      cin >> option;
       if(option == "buy" )
       {
          transaction newTran;
@@ -128,6 +129,7 @@ string getNum(string str){
 
 void displayCopy(Queue<transaction> b,Queue<transaction> s)
 {
+   if(!b.empty()){
    cout << "Currently Held:\n";
    //for each in bought
    while(!b.empty()){

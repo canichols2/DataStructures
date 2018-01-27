@@ -129,7 +129,7 @@ string getNum(string str){
 
 void displayCopy(Queue<transaction> b,Queue<transaction> s)
 {
-   if(!b.empty()){
+   if(!b.empty())
    cout << "Currently Held:\n";
    //for each in bought
    while(!b.empty()){

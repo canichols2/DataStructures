@@ -47,15 +47,14 @@ void stocksBuySell()
    option = getWord(cin);
    for(;;){
       option = "";
-      // cin.clear();
-      // cin.ignore(INT_MAX,'/n'); 
       cout << "> ";
       option = getWord(cin);
       if(option == "buy" )
       {
          transaction newTran;
-         getline(cin,countString,' ');
-         newTran.count = stoi(countString);
+         // getline(cin,countString,' ');
+         // newTran.count = stoi(countString);
+         cin >> newTran.count;
          cin >> newTran.price;
          // if(valueString[0] == "$")valueString.erase(1,1);
          // newTran.price = stoi(getNum(valueString));
@@ -63,11 +62,13 @@ void stocksBuySell()
       }
       else if(option == "sell" )
       {
-         getline(cin,countString,' ');
-         int toSell = stoi(countString);
+         // getline(cin,countString,' ');
+         // int toSell = stoi(countString);
          transaction S;
+         cin >> S.count;
+         int toSell = S.count;
          cin >> S.price;
-         S.count = stoi(countString);
+         // S.count = stoi(countString);
          // S.price = stoi(getNum(valueString));
          while(toSell){
             transaction &B = buyQueue.front();

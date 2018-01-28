@@ -175,10 +175,9 @@ void Queue<T>::push(T t)
    {
       T *temp;
       // double capacity
-      cap *= 2;
       try
       {
-         temp = new T[cap];
+         temp = new T[cap * 2];
       }
       catch (std::bad_alloc)
       {
@@ -188,6 +187,7 @@ void Queue<T>::push(T t)
          int ri = (i + _front) % cap;
          temp[i] = data[ri];
       }
+      cap *= 2;
       delete[] data;
       data = temp;
    }

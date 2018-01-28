@@ -130,7 +130,7 @@ string getNum(string str){
 void displayCopy(Queue<transaction> b,Queue<transaction> s)
 {
    if(!b.empty())
-   cout << "Currently Held:\n";
+   cout << "Currently held:\n";
    //for each in bought
    while(!b.empty()){
       cout << "\tBought " << b.front().count << " shares at " << b.front().price << endl;

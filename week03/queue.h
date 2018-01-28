@@ -11,7 +11,7 @@
 *        Queue         : A class that holds stuff
 *        QueueIterator : An interator through Queue
 * Author
-*    Br. Helfrich
+*    Cody Nichols
 ************************************************************************/
 
 #ifndef QUEUE_H
@@ -188,6 +188,8 @@ void Queue<T>::push(T t)
          temp[i] = data[ri];
       }
       cap *= 2;
+      _front = 0;
+      _back = numItems-1;
       delete[] data;
       data = temp;
    }
@@ -244,12 +246,12 @@ void Queue<T>::pop() throw(const char *)
    }
    else
    {
-      throw "ERROR: Unable to pop from an empty Queue";
+      throw "ERROR: attempting to pop from an empty queue";
    }
 }
 
 /*****************************************************
- * top: 
+ * front: 
  * Return element reference from top of queue
  *****************************************************/
 template <class T>
@@ -261,11 +263,11 @@ T &Queue<T>::front() throw(const char *)
    }
    else
    {
-      throw "ERROR: Unable to reference the element from an empty Queue";
+      throw "ERROR: attempting to access an item in an empty queue";
    }
 }
 /*****************************************************
- * _back: 
+ * back: 
  * Return element reference from top of queue
  *****************************************************/
 template <class T>
@@ -277,7 +279,7 @@ T &Queue<T>::back() throw(const char *)
    }
    else
    {
-      throw "ERROR: Unable to reference the element from an empty Queue";
+      throw "ERROR: attempting to access an item in an empty queue";
    }
 }
 /*****************************************************

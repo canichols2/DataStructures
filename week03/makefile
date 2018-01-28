@@ -8,6 +8,8 @@
 #     <put a description here>
 # Time:
 #     1.5h making the Queue class
+#		3h building Stocks
+#		2h troubleshooting segfault
 ###############################################################
 
 ##############################################################

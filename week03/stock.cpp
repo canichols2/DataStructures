@@ -44,52 +44,53 @@ void stocksBuySell()
    string option,countString,valueString;
    Queue<transaction> buyQueue = Queue<transaction>();
    Queue<transaction> sellQueue = Queue<transaction>();
-   // option = getWord(cin);
    for(;;){
       option = "";
       cout << "> ";
-      // option = getWord(cin);
       cin >> option;
       if(option == "buy" )
       {
          transaction newTran;
-         // getline(cin,countString,' ');
-         // newTran.count = stoi(countString);
          cin >> newTran.count;
          cin >> newTran.price;
-         // if(valueString[0] == "$")valueString.erase(1,1);
-         // newTran.price = stoi(getNum(valueString));
          buyQueue.push(newTran);
       }
       else if(option == "sell" )
       {
-         // getline(cin,countString,' ');
-         // int toSell = stoi(countString);
-         transaction S;
-         cin >> S.count;
-         int toSell = S.count;
-         cin >> S.price;
-         // S.count = stoi(countString);
-         // S.price = stoi(getNum(valueString));
+         int toSell;
+         Dollars price;
+         cin >> toSell;
+         cin >> price;
          while(toSell){
             transaction &B = buyQueue.front();
             if(toSell < B.count){
+               transaction S;
+               S.price = price;
+               S.count = toSell;
                B.count -= toSell;
                S.difference += (S.price*toSell)-(B.price*toSell);
                toSell=0;
+               sellQueue.push(S);
             }
             else if(toSell == B.count){
+               transaction S;
+               S.price = price;
+               S.count = toSell;
                S.difference += (S.price*toSell)-(B.price*B.count);
                buyQueue.pop();
                toSell=0;
+               sellQueue.push(S);
 
             }else if(toSell > B.count){
+               transaction S;
+               S.price = price;
                S.difference += (S.price*B.count)-(B.price*B.count);
                buyQueue.pop();
                toSell -= B.count;
+               S.count = B.count;
+               sellQueue.push(S);
             }
          }
-         sellQueue.push(S);
 
       }
       else if(option == "display" )
@@ -146,7 +147,5 @@ void displayCopy(Queue<transaction> b,Queue<transaction> s)
       proceeds +=  s.front().difference;
       s.pop();
    }
-      
-
    cout << "Proceeds: " << proceeds << endl;
 }

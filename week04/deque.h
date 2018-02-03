@@ -163,7 +163,7 @@ void Deque<T>::realloc()
       }
       catch (std::bad_alloc)
       {
-         throw "ERROR: Unable to allocate buffer for Deque";
+         throw "ERROR: Unable to allocate a new buffer for deque";
       }
    }
    if (cap == numItems)
@@ -176,7 +176,7 @@ void Deque<T>::realloc()
       }
       catch (std::bad_alloc)
       {
-         throw "ERROR: Unable to allocate buffer for Deque";
+         throw "ERROR: Unable to allocate a new buffer for deque";
       }
       for (int i = 0; i < numItems; i++){
          int ri = (i + _front) % cap;
@@ -237,7 +237,7 @@ Deque<T> &Deque<T>::operator=(const Deque<T> &rhs)
       }
       catch (std::bad_alloc)
       {
-         throw "ERROR: Unable to allocate buffer for Deque";
+         throw "ERROR: Unable to allocate a new buffer for Deque";
       }
       for (int i = 0 ; i < numItems; i++){
          int ri = (i + rhs._front) % rhs.cap;

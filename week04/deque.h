@@ -40,7 +40,7 @@ class Deque
    int _back;      // _back of the line index
  public:
    // default constructor : empty and kinda useless
-   Deque() : numItems(0), cap(0),_front(0),_back(-1), data(NULL) {}
+   Deque() : numItems(0), cap(0),_front(0),_back(0), data(NULL) {}
    // copy constructor : copy it
    Deque(const Deque &rhs) throw(const char *);
    // non-default constructor : pre-allocate
@@ -76,7 +76,7 @@ Deque<T>::Deque(const Deque<T> &rhs) throw(const char *)
    if (rhs.cap == 0)
    {
       cap = _front = numItems = 0;
-      _back = -1;
+      _back = 0;
       data = NULL;
       return;
    }
@@ -102,13 +102,8 @@ Deque<T>::Deque(const Deque<T> &rhs) throw(const char *)
    for (int i = 0 ; i < numItems; i++){
       int ri = (i + rhs._front) % rhs.cap;
       data[i] = rhs.data[ri];
-      _back = i;
    }
-      
-
-   // the rest needs to be filled with the default value for T
-   // for (int i = numItems; i < cap; i++)
-   //    data[i] = T();
+   _back = numItems;
 }
 
 /**********************************************
@@ -142,20 +137,17 @@ Deque<T>::Deque(int capacity) throw(const char *)
    cap = capacity;
    numItems = 0;
    _front = 0;
-   _back = -1;
+   _back = 0;
 
-   // initialize the deque by calling the default constructor
-   for (int i = 0; i < capacity; i++)
-      data[i] = T();
+   // initialize the deque by calling the default constructor of the type...
+   // got rid of it because if type was int or something, it would crash. probably.
+   // since it doesn't have an int default constructor
+   // for (int i = 0; i < capacity; i++)
+   //    data[i] = T();
 }
 // the functions I added
-
-/*****************************************************
- * Push: 
- * Add to top of deque
- *****************************************************/
 template <class T>
-void Deque<T>::push(T t)
+void Deque<T>::realloc()
 {
    if (cap == 0)
    {
@@ -193,8 +185,17 @@ void Deque<T>::push(T t)
       delete[] data;
       data = temp;
    }
-   _back = (_back + 1) % cap;
+}
+/*****************************************************
+ * Push: 
+ * Add to top of deque
+ *****************************************************/
+template <class T>
+void Deque<T>::push(T t)
+{
+   realloc();
    data[_back] = t;
+   _back = (_back + 1) % cap;
    numItems++;
 }
 
@@ -212,7 +213,7 @@ Deque<T> &Deque<T>::operator=(const Deque<T> &rhs)
    numItems = rhs.size();
    cap = rhs.cap;
    _front = 0;
-   _back = rhs.numItems-1;
+   // _back = rhs.numItems-1;
    if (cap)
    {
       try
@@ -226,7 +227,7 @@ Deque<T> &Deque<T>::operator=(const Deque<T> &rhs)
       for (int i = 0 ; i < numItems; i++){
          int ri = (i + rhs._front) % rhs.cap;
          data[i] = rhs.data[ri];
-         _back = i;
+         _back = (i + 1) % cap;
       }
    }
    return *this;
@@ -275,7 +276,7 @@ T &Deque<T>::back() throw(const char *)
 {
    if (numItems)
    {
-      return data[_back];
+      return data[(_back+cap-1)%cap];
    }
    else
    {

@@ -7,7 +7,7 @@
 # Summary:
 #     DeQue. I can push, pop and top from both sides.
 # Time:
-#     <how long did it take to complete this program>?
+#     2 hours. this week was easy.
 ###############################################################
 
 ##############################################################

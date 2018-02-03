@@ -57,8 +57,10 @@ class Deque
     * function for other not in line function
     *****/
    void clear();
-   void push(T t);
-   void pop() throw(const char *);
+   void push_front(T t);
+   void push_back(T t);
+   void pop_front() throw(const char *);
+   void pop_back() throw(const char *);
    T &front() throw(const char *);
    T &back() throw(const char *);
    Deque<T> &operator=(const Deque<T> &rhs);
@@ -187,15 +189,27 @@ void Deque<T>::realloc()
    }
 }
 /*****************************************************
- * Push: 
+ * Push_back: 
  * Add to top of deque
  *****************************************************/
 template <class T>
-void Deque<T>::push(T t)
+void Deque<T>::push_back(T t)
 {
    realloc();
    data[_back] = t;
    _back = (_back + 1) % cap;
+   numItems++;
+}
+/*****************************************************
+ * Push_front: 
+ * Add to top of deque
+ *****************************************************/
+template <class T>
+void Deque<T>::push_front(T t)
+{
+   realloc();
+   _front = (_front - 1+cap) % cap;
+   data[_front] = t;
    numItems++;
 }
 
@@ -234,16 +248,33 @@ Deque<T> &Deque<T>::operator=(const Deque<T> &rhs)
 }
 
 /*****************************************************
- * pop: 
+ * pop_front: 
  * Remove item from top of deque
  *****************************************************/
 template <class T>
-void Deque<T>::pop() throw(const char *)
+void Deque<T>::pop_front() throw(const char *)
 {
    if (numItems)
    {
       numItems--;
       _front = (_front + 1)%cap;
+   }
+   else
+   {
+      throw "ERROR: attempting to pop from an empty deque";
+   }
+}
+/*****************************************************
+ * pop_back: 
+ * Remove item from top of deque
+ *****************************************************/
+template <class T>
+void Deque<T>::pop_back() throw(const char *)
+{
+   if (numItems)
+   {
+      numItems--;
+      _back = (_back - 1 +cap)%cap;
    }
    else
    {
@@ -293,6 +324,6 @@ void Deque<T>::clear()
 {
  numItems=0;
  _front=0;
- _back=-1;
+ _back=0;
 }
 #endif // DEQUE_H

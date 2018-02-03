@@ -262,7 +262,7 @@ void Deque<T>::pop_front() throw(const char *)
    }
    else
    {
-      throw "ERROR: attempting to pop from an empty deque";
+      throw "ERROR: unable to pop from the front of empty deque";
    }
 }
 /*****************************************************
@@ -279,7 +279,7 @@ void Deque<T>::pop_back() throw(const char *)
    }
    else
    {
-      throw "ERROR: attempting to pop from an empty deque";
+      throw "ERROR: unable to pop from the back of empty deque";
    }
 }
 
@@ -296,7 +296,7 @@ T &Deque<T>::front() throw(const char *)
    }
    else
    {
-      throw "ERROR: attempting to access an item in an empty deque";
+      throw "ERROR: unable to access data from an empty deque";
    }
 }
 /*****************************************************
@@ -312,7 +312,7 @@ T &Deque<T>::back() throw(const char *)
    }
    else
    {
-      throw "ERROR: attempting to access an item in an empty deque";
+      throw "ERROR: unable to access data from an empty deque";
    }
 }
 /*****************************************************

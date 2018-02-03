@@ -14,6 +14,7 @@
 #include "nowServing.h" // for nowServing() prototype
 #include "deque.h"      // for DEQUE
 using namespace std;
+   struct student { student(){name="";csClass="";min=1;} student(string n,string c, int m){name = n;csClass = c; min = m;} string name; string csClass; int min; };
 
 /************************************************
  * NOW SERVING
@@ -35,7 +36,6 @@ void nowServing()
    string name;
    int min;
    int curMin=0;
-   struct student { student(){name="";csClass="";min=1;} student(string n,string c, int m){name = n;csClass = c; min = m;} string name; string csClass; int min; };
    student currentStudent;
    Deque<student> queue;
    do

@@ -98,8 +98,7 @@ void stocksBuySell()
          displayCopy(buyQueue,sellQueue);
       }
       else if(option == "quit" ) 
-      { 
-         displayCopy(buyQueue,sellQueue);
+      {
          break; 
       }
    }

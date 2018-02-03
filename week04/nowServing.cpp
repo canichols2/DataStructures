@@ -14,7 +14,17 @@
 #include "nowServing.h" // for nowServing() prototype
 #include "deque.h"      // for DEQUE
 using namespace std;
-   struct student { student(){name="";csClass="";min=1;} student(string n,string c, int m){name = n;csClass = c; min = m;} string name; string csClass; int min; };
+   struct student 
+   { 
+      student()
+      {name="";csClass="";min=1;e=false;} 
+      student(string n,string c, int m)
+      {name = n;csClass = c; min = m;e=false;}
+      bool e; 
+      string name; 
+      string csClass; 
+      int min; 
+   };
 
 /************************************************
  * NOW SERVING
@@ -49,6 +59,7 @@ void nowServing()
          {
             cin >> csClass >> name >> min;
             queue.push_front(student(name,csClass,min) );
+            queue.front().e = true;
          }
          else if (command == "none")
          {
@@ -73,7 +84,11 @@ void nowServing()
          }
          if(currentStudent.min > 0){
             //TODO: output the current student
-            cout << "\tCurrently serving " << currentStudent.name << " for class "<<currentStudent.csClass<<". Time left: "<< currentStudent.min<<endl;
+            if(currentStudent.e){
+               cout << "\tEmergency for " << currentStudent.name << " for class "<<currentStudent.csClass<<". Time left: "<< currentStudent.min<<endl;
+            }else{
+               cout << "\tCurrently serving " << currentStudent.name << " for class "<<currentStudent.csClass<<". Time left: "<< currentStudent.min<<endl;
+            }
          }
       }
       catch (const char * e)

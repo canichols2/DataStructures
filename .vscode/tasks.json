@@ -4,6 +4,12 @@
    "version": "2.0.0",
    "tasks": [
       {
+         "label": "buildCppW4",
+         "type": "shell",
+        //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
+         "command": "pwd;g++ -g -o ./week04/test.exe ./week04/week04.cpp ./week04/nowServing.cpp"
+      },
+      {
          "label": "buildCppW3",
          "type": "shell",
         //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"

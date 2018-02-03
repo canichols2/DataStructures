@@ -56,6 +56,7 @@ class Deque
    /*****
     * function for other not in line function
     *****/
+   void realloc();
    void clear();
    void push_front(T t);
    void push_back(T t);
@@ -183,7 +184,7 @@ void Deque<T>::realloc()
       }
       cap *= 2;
       _front = 0;
-      _back = numItems-1;
+      _back = numItems;
       delete[] data;
       data = temp;
    }

@@ -1,11 +1,11 @@
 ###############################################################
 # Program:
 #     Week 04, DEQUE
-#     Brother XXXXX, CS235
+#     Brother Ercanbrack, CS235
 # Author:
-#     <your name here>
+#     Cody Nichols
 # Summary:
-#     <put a description here>
+#     DeQue. I can push, pop and top from both sides.
 # Time:
 #     <how long did it take to complete this program>?
 ###############################################################

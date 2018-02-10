@@ -50,11 +50,11 @@ class Set
       void     erase(int index);
       int      find(T t);
       void     realloc();
-      Set<T>&  operator && (const Set<T> &rhs);
-      Set<T>&  operator || (const Set<T> &rhs);
-      T&       operator [] (const int i);
-      T&       operator [] (const int i)const;
-      void     operator =  (const Set<T>& rhs);
+      Set<T>&  operator&& (const Set<T> &rhs);
+      Set<T>&  operator|| (const Set<T> &rhs);
+      T&       operator[] (const int i);
+      T&       operator[] (const int i)const;
+      void     operator=  (const Set<T>& rhs);
 
 };
 

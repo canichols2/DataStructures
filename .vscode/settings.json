@@ -20,7 +20,8 @@
    "string": "cpp",
    "xlocale": "cpp",
    "ostream": "cpp",
-   "istream": "cpp"
+   "istream": "cpp",
+   "initializer_list": "cpp"
 },
 "editor.tabSize": 3,
 

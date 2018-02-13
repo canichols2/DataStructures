@@ -21,7 +21,8 @@
    "xlocale": "cpp",
    "ostream": "cpp",
    "istream": "cpp",
-   "initializer_list": "cpp"
+   "initializer_list": "cpp",
+   "fstream": "cpp"
 },
 "editor.tabSize": 3,
 

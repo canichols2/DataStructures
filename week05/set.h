@@ -48,9 +48,9 @@ class Set
       void     erase(int index);
       int      find(T t);
       void     realloc();
-      Set<T>&  operator&& (const Set<T> &rhs);
-      Set<T>&  operator|| (const Set<T> &rhs);
-      T&       operator[] (const int i);
+      Set<T>&  operator&& ( Set<T> &rhs);
+      Set<T>&  operator|| ( Set<T> &rhs);
+      T&       operator[] ( int i);
       T&       operator[] (const int i)const;
       void     operator=  (const Set<T>& rhs);
 
@@ -185,8 +185,20 @@ Set <T> :: Set(int capacity) throw (const char *)
  * Functions not inline
 ****/
 
+/***************************
+ * SET: Insert
+ * Add items to set and sort
+ * *************************/
 template <class T>
 void  Set<T>::insert(T t){
+   if(numItems == 0){
+      if(cap == numItems)
+         realloc();   
+      data[0] = t;
+      numItems++;
+      return;
+
+   }
    int index = find(t);
    if(index < 0){
       if(cap == numItems){
@@ -195,14 +207,14 @@ void  Set<T>::insert(T t){
       index *= -1;
       //Index was 0 so i had rturned numItems
       //convert it back to index 0
-      if(index == numItems){
+      if(index > numItems){
          index = 0;
       }
       
       T swap1 = data[index];
       T swap2;
       data[index] = t;
-      for (int i = index + 1; i < numItems; i++){
+      for (int i = index + 1; i <= numItems; i++){
          swap2    = data[i];
          data[i]  = swap1;
          swap1    = swap2;
@@ -210,7 +222,10 @@ void  Set<T>::insert(T t){
       numItems++;
    }
 }
-
+/***************************
+ * SET: Erase
+ * remove an item from the set
+ * *************************/
 template <class T>
 void  Set<T>::erase(int index){
    for (int i = index;i<numItems;i++){
@@ -218,91 +233,135 @@ void  Set<T>::erase(int index){
    }
    numItems--;
 }
+
+/***************************
+ * SET: Realloc
+ * Reallocate the set for more
+ * space when needed.
+ * *************************/
 template <class T>
 void  Set<T>::realloc(){
    if (cap == 0)
+   {
+      cap = 1;
+      // Add 1 to capacity.
+      try
       {
-          cap = 1;
-         // Add 1 to capacity.
-         try
-            {
-               data = new T[cap];
-            }
-            catch (std::bad_alloc)
-            {
-               throw "ERROR: Unable to allocate buffer for Set";
-            }
-        //  data = new T[1];
+         data = new T[cap];
       }
-      if (cap == numItems)
+      catch (std::bad_alloc)
       {
-        T * temp;
-         // double capacity
-         cap *= 2;
-         try
-            {
-               temp = new T[cap];
-            }
-            catch (std::bad_alloc)
-            {
-               throw "ERROR: Unable to allocate buffer for Set";
-            }
-         for(int i=0;i < numItems;i++)
-            temp[i] = data[i];
-        //  std::cout << "deleting data now/n";
-         delete [] data;
-        //  std::cout << "deleted data/n";
-         data = temp;
+         throw "ERROR: Unable to allocate buffer for Set";
       }
+   //  data = new T[1];
+   }
+   if (cap == numItems)
+   {
+   T * temp;
+      // double capacity
+      cap *= 2;
+      try
+      {
+         temp = new T[cap];
+      }
+      catch (std::bad_alloc)
+      {
+         throw "ERROR: Unable to allocate buffer for Set";
+      }
+      for(int i=0;i < numItems;i++)
+         temp[i] = data[i];
+   //  std::cout << "deleting data now/n";
+      delete [] data;
+   //  std::cout << "deleted data/n";
+      data = temp;
+   }
 }
 
+/*******************************************************
+ * SET: find
+ * returns index of item in set returns negative index
+ * of where it would go if it isn't in there
+ * returns negative num-items if should go to 0 index.
+ * ****************************************************/
 template <class T>
 int   Set<T>::find(T t){
+   if(numItems == 0)
+      return -1;
    // iBegin  0
    int iB = 0;
    // iEnd  numElements – 1
    int iE = numItems - 1;
    int iM = (iB + iE)/2;
    // WHILE iBegin ≤ iEnd
+   iM = (iB + iE)/2;
    while (iB <= iE){
-      iM = (iB + iE)/2;
       if (t == data[iM]){
          return iM;
       }else if(t < data[iM]){
          iE = iM-1;
+         iM = (iB + iE)/2;
       }else if(t > data[iM]){
          iB = iM + 1;
+         iM = (iB + iE)/2;
       }
    }
+   if(t > data[iM]){
+      return -(iM + 1);
+   }
+   if(t < data[iM]){}
+
    if (iM == 0){
-      return numItems * (-1);
+      return (numItems +1) * (-1);
    }
    return -iM;
    // RETURN numElements
 }
 
+/***************************
+ * SET: &&
+ * Intersection Operator
+ * Only those in both sets
+ * *************************/
 template <class T>
-Set<T>&    Set<T>::operator&&(const Set<T> &rhs)
+Set<T>&    Set<T>::operator&&( Set<T> &rhs)
 {
-
+   Set<T>* temp = new Set<T>();
+   for(SetIterator<T> it = this->begin(); it != this->end(); ++it){
+      if(rhs.find(*it) >= 0){
+         temp->insert(*it);
+      }
+   }
+   return *temp;
 }
 
+/***************************
+ * SET: ||
+ * Union Operator
+ * Adds 2 sets together and returns new set containing both
+ * *************************/
 template <class T>
-Set<T>&    Set<T>::operator||(const Set<T> &rhs)
+Set<T>&    Set<T>::operator||( Set<T> &rhs)
 {
-
+   Set<T>* temp = new Set<T>(rhs);
+   for(SetIterator<T> it = this->begin(); it != this->end(); ++it){
+      if(rhs.find(*it) < 0){
+         temp->insert(*it);
+      }
+   }
+   return *temp;
 }
 
-template <class T>
-T&    Set<T>::operator[](const int i)
-{
 
+template <class T>
+T&    Set<T>::operator[](int i)
+{
+   return & SetIterator<T>(data + i);
 }
 
 template <class T>
 T&    Set<T>::operator[](const int i)const
 {
-
+   return & SetIterator<T>(data + i);
 }
 
 template <class T>

@@ -7,7 +7,7 @@
        "label": "buildCppW5",
        "type": "shell",
       //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
-       "command": "pwd;g++ -g -o ./week05/test.exe ./week05/week05.cpp ./week05/card.cpp ./week05/cardTest.cpp ./week05/goFish.cpp"
+       "command": "pwd;g++ -g -o ./week05/test.exe ./week05/week05.cpp ./week05/card.cpp  ./week05/goFish.cpp"
     },
     {
        "label": "buildCppW4",

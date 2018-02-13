@@ -21,7 +21,6 @@ class Set
       T *data;
       int numItems;
       int cap;
-      void realoc();
    public:
             // default constructor : empty and kinda useless
       Set() : numItems(0), cap(0), data(NULL) {}
@@ -35,8 +34,7 @@ class Set
       int size() const    { return numItems;              }
             //Capacity allocated
       int capacity()const { return cap;                   }
-            // add an item to the Set
-      void insert(const T & t) throw (const char *);
+      
             //Iterators..........
       SetIterator <T> end() { return SetIterator<T>(data + numItems);}
       SetIterator <T> begin() { return SetIterator<T>(data); }
@@ -192,7 +190,7 @@ void  Set<T>::insert(T t){
    int index = find(t);
    if(index < 0){
       if(cap == numItems){
-         realoc()
+         realloc();
       }
       index *= -1;
       //Index was 0 so i had rturned numItems
@@ -204,7 +202,7 @@ void  Set<T>::insert(T t){
       T swap1 = data[index];
       T swap2;
       data[index] = t;
-      for (var i = index + 1; i < numItems; i++){
+      for (int i = index + 1; i < numItems; i++){
          swap2    = data[i];
          data[i]  = swap1;
          swap1    = swap2;
@@ -215,7 +213,7 @@ void  Set<T>::insert(T t){
 
 template <class T>
 void  Set<T>::erase(int index){
-   for (var i = index;i<numItems;i++){
+   for (int i = index;i<numItems;i++){
       data[i] = data[i+1];
    }
    numItems--;
@@ -263,7 +261,7 @@ int   Set<T>::find(T t){
    // iBegin  0
    int iB = 0;
    // iEnd  numElements – 1
-   int iE = numitems - 1;
+   int iE = numItems - 1;
    int iM = (iB + iE)/2;
    // WHILE iBegin ≤ iEnd
    while (iB <= iE){
@@ -284,19 +282,34 @@ int   Set<T>::find(T t){
 }
 
 template <class T>
-Set<T>&    Set<T>::operator&&(const Set<T> &rhs);
+Set<T>&    Set<T>::operator&&(const Set<T> &rhs)
+{
+
+}
 
 template <class T>
-Set<T>&    Set<T>::operator||(const Set<T> &rhs);
+Set<T>&    Set<T>::operator||(const Set<T> &rhs)
+{
+
+}
 
 template <class T>
-T&    Set<T>::operator[](const int i);
+T&    Set<T>::operator[](const int i)
+{
+
+}
 
 template <class T>
-T&    Set<T>::operator[](const int i)const;
+T&    Set<T>::operator[](const int i)const
+{
+
+}
 
 template <class T>
-void  Set<T>::operator=(const Set<T>& rhs);
+void  Set<T>::operator=(const Set<T>& rhs)
+{
+
+}
 
 
 

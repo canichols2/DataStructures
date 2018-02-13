@@ -1,13 +1,13 @@
 ###############################################################
 # Program:
 #     Week 05, SET
-#     Brother XXXXX, CS235
+#     Brother Ercanbrack, CS235
 # Author:
-#     <your name here>
+#     Cody Nichols
 # Summary:
-#     <put a description here>
+#     A set of numbers that i can use joins on
 # Time:
-#     <how long did it take to complete this program>?
+#     5h?
 ###############################################################
 
 ##############################################################

@@ -78,7 +78,7 @@ void goFish()
       else
          cout << ", "<< *it;
    }
-
+   cout<<endl;
 
 
    return ;

@@ -43,10 +43,10 @@ void goFish()
     ************/
    Set<Card> theirHand  =  Set<Card>();
    Set<Card> myHand     =  Set<Card>();
-   while (!myHandFile.eof()){
-      Card temp;
-      myHandFile >> temp;
-      theirHand.insert(temp);
+      Card cardInput;
+      // myHandFile >> cardInput;
+   while (myHandFile >> cardInput){
+      theirHand.insert(cardInput);
    }
    Card guess = "blank";
    char temp[128] = "blank";
@@ -57,7 +57,7 @@ void goFish()
       cin >> temp;
       guess = temp;
       index = theirHand.find(guess);
-      cout << "Guess:"<<guess<<"\nTheirHand:"<<*theirHand.begin()<<endl;
+      // cout << "Guess:"<<guess<<"\nTheirHand:"<<*theirHand.begin()<<endl;
       if(index < 0){
          cout << "\tGo Fish!" << endl;
       }else{

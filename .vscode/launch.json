@@ -5,29 +5,51 @@
    "version": "0.2.0",
    "configurations": [
 
-    {
-        "name": "Week05",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "${workspaceFolder}/week05/test.exe",
-        "args": [],
-        "stopAtEntry": false,
-        "cwd": "${workspaceFolder}/week05",
-        "environment": [],
-        "externalConsole": true,
-        "MIMode": "gdb",
-        "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
-        "setupCommands": [
-            {
-             "console":"integratedTerminal",
-              "description": "Enable pretty-printing for gdb",
-              "text": "-enable-pretty-printing",
-              "ignoreFailures": true
-           }
-        ],
-        "preLaunchTask": "buildCppW5",
-        "internalConsoleOptions": "openOnFirstSessionStart"
-     },{
+      {
+          "name": "Week06",
+          "type": "cppdbg",
+          "request": "launch",
+          "program": "${workspaceFolder}/week06/test.exe",
+          "args": [],
+          "stopAtEntry": false,
+          "cwd": "${workspaceFolder}/week06",
+          "environment": [],
+          "externalConsole": true,
+          "MIMode": "gdb",
+          "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
+          "setupCommands": [
+              {
+               "console":"integratedTerminal",
+                "description": "Enable pretty-printing for gdb",
+                "text": "-enable-pretty-printing",
+                "ignoreFailures": true
+             }
+          ],
+          "preLaunchTask": "buildCppW6",
+          "internalConsoleOptions": "openOnFirstSessionStart"
+       },{
+             "name": "Week05",
+             "type": "cppdbg",
+             "request": "launch",
+             "program": "${workspaceFolder}/week05/test.exe",
+             "args": [],
+             "stopAtEntry": false,
+             "cwd": "${workspaceFolder}/week05",
+             "environment": [],
+             "externalConsole": true,
+             "MIMode": "gdb",
+             "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
+             "setupCommands": [
+                 {
+                  "console":"integratedTerminal",
+                   "description": "Enable pretty-printing for gdb",
+                   "text": "-enable-pretty-printing",
+                   "ignoreFailures": true
+                }
+             ],
+             "preLaunchTask": "buildCppW5",
+             "internalConsoleOptions": "openOnFirstSessionStart"
+          },{
         "name": "Week04",
         "type": "cppdbg",
         "request": "launch",

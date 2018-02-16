@@ -34,10 +34,10 @@ class Node
 
 template <class T>
 Node<T>* find(Node<T> * ptr, const T &item){
-   if(ptr->data == NULL || ptr->pNext == NULL) return NULL;
+   if(ptr == NULL || ptr->data == NULL || ptr->pNext == NULL) return NULL;
    if(ptr->data == item)
       return ptr;
-   return find(ptr->pNext,item)
+   return find(ptr->pNext,item);
 }
 template <class T>
 void insert( T item, Node<T>* &ptr, bool headInsert = false){

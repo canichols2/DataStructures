@@ -3,12 +3,18 @@
    // for the documentation about the tasks.json format
    "version": "2.0.0",
    "tasks": [
-    {
-       "label": "buildCppW5",
-       "type": "shell",
-      //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
-       "command": "pwd;g++ -g -o ./week05/test.exe ./week05/week05.cpp ./week05/card.cpp  ./week05/goFish.cpp"
-    },
+      {
+         "label": "buildCppW6",
+         "type": "shell",
+        //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
+         "command": "pwd;g++ -g -o ./week06/test.exe ./week06/week06.cpp "
+      },
+      {
+         "label": "buildCppW5",
+         "type": "shell",
+        //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
+         "command": "pwd;g++ -g -o ./week05/test.exe ./week05/week05.cpp ./week05/card.cpp  ./week05/goFish.cpp"
+      },
     {
        "label": "buildCppW4",
        "type": "shell",

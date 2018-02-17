@@ -1,11 +1,12 @@
 ###############################################################
 # Program:
 #     Week 06, NODE
-#     Brother XXXXX, CS235
+#     Brother Ercanbrack, CS235
 # Author:
-#     <your name here>
+#     Cody Nichols
 # Summary:
-#     <put a description here>
+#     A simple implementation of a Linked List
+#		And non-member functions to sort,add,insert,etc.
 ###############################################################
 
 ##############################################################

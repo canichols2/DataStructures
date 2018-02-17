@@ -16,21 +16,9 @@ class Node
    public:
       T data;
       Node<T>*pNext;
-      Node()
-      {
-         data = NULL;
-         pNext = NULL;
-      }
-      Node(T item)
-      {
-         data = item;
-         pNext = NULL;
-      }
-      Node(T item, Node<T>*next)
-      {
-         data = item;
-         pNext = next;
-      }
+      Node():data(NULL),pNext(NULL) {}
+      Node(T item):data(item),pNext(NULL) {}
+      Node(T item, Node<T>*next):data(item),pNext(next) {}
 };
 
 /******

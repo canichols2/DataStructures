@@ -14,58 +14,162 @@ class Node;
 template <class T>
 class List
 {
-   private:
+   private: //Attributes
       Node<T>* pHead;
       Node<T>* pTail;
-      Node<T>* find(Node<T> * ptr, const T &item){
-         if(!ptr) return NULL;
-         if(ptr->data == item)
-            return ptr;
-         return find(ptr->pNext,item);
-      }
-      void hInsert( T item, Node<T>* &ptr, bool headInsert = false){
-         if(headInsert || !ptr){
-            Node<T>* newPtr = new Node<T>(item,ptr,ptr->pPrev);
-            ptr=newPtr;
-         }else{
-            Node<T>* newPtr = new Node<T>(item,ptr->pNext);
-            ptr->pNext=newPtr;
-         }
-      }
-      Node<T>* copy(Node<T>* ptr){
-            if(ptr)
-               return new Node<T>(
-                  ptr->data,
-                  copy(ptr->pNext)
-               );
-            return 0;
-            
-      }
-      void freeData(Node<T>* &ptr){
-         if(ptr != NULL){
-            freeData(ptr->pNext);
-            delete ptr;
-         }
-         ptr = NULL;
-      }
+      int numItems;
+
+   private: //Methods
+      Node<T>* find(Node<T> * ptr, const T &item);
+      void hInsert( T item, Node<T>* &ptr, bool headInsert = false);
+      Node<T>* copy(Node<T>* ptr);
+      void freeData(Node<T>* &ptr);
    public:
-               List();
+               List()   :pHead(NULL),pTail(NULL);
+               ~List()  {freeData(pHead); numItems = 0;}
+      bool     empty()  {return numItems;}
+      void     clear()  {freeData(pHead); numItems = 0;}
+      int      size()   {return numItems}
+      T&       front()  {return pHead->data}       // ERROR: unable to access data from an empty list
+      T&       back()   {return pTail->data}
+      Node<T>* begin()  {return ListIterator(this->pHead);}
+      Node<T>* rbegin() {return ListIterator(this->pTail);}
+      Node<T>* end()    {return ListIterator();}
+      Node<T>* rend()   {return ListIterator();}
+      
+      // Non inline functions
                List(List oldList);
-               ~List();
-      bool     empty();
-      void     clear();
-      int      size();
-      void     push_back(T item);
+      void     insert(ListIterator it,T item);      // ERROR: unable to allocate a new node for a list
+      void     remove(ListIterator it);      // ERROR: unable to remove from an invalid location in a list
       void     push_front(T item);
-      T        front(){return pHead->data}       // ERROR: unable to access data from an empty list
-      T        back(){return pTail->data}
-      void     insert(T item,ListIterator it);      // ERROR: unable to allocate a new node for a list
-      void     remove();      // ERROR: unable to remove from an invalid location in a list
-      Node<T>* begin();
-      Node<T>* rbegin();
-      Node<T>* end();
-      Node<T>* rend();
+      void     push_back(T item);
 };
+
+/**
+ * Copy Constructor
+ * Copy's a list to a new list.
+ * */
+template <class T>
+List::List(List oldList){
+   pHead = copy(oldList->pHead);
+   Node<T>* ptr = pHead;
+   while (ptr->pNext){
+      ptr=ptr->pNext;
+   }
+   pTail = ptr;
+}
+
+/**
+ * insert public function
+ * Inserts an item in the middle of a list. 
+ * There are two parameters: 
+ * * the data item to be inserted, and 
+ * * a ListIterator pointing to the location in the list where the new item will be inserted before. 
+ * The return value is an iterator to the newly inserted item. 
+ * In the case of an allocation error, the following exception will be thrown:
+ * */
+template <class T>
+void     List::insert(ListIterator it,T item){      // ERROR: unable to allocate a new node for a list
+   if(it){
+      hInsert(item,it->p,true);
+   }else{
+
+   }
+}
+
+/**
+ * BLANK private function
+ * BLANK BLANK BLANK
+ * */
+template <class T>
+void     List::remove(ListIterator it){      // ERROR: unable to remove from an invalid location in a list
+   if(*it == pHead) pHead = *it->pNext;
+   if(*it == pTail) pTail = *it->pPrev;
+   if(*it->pNext) *it->pNext->pPrev = *it->pPrev;
+   if(*it->pPrev) *it->pPrev->pNext = *it->pNext;
+
+}
+
+/**
+ * BLANK private function
+ * BLANK BLANK BLANK
+ * */
+template <class T>
+void     List::push_front(T item);
+
+/**
+ * BLANK private function
+ * BLANK BLANK BLANK
+ * */
+template <class T>
+void     List::push_back(T item);
+
+/**
+ * find private function
+ * searches list, returns ptr to node of matching item
+ * returns null if not found.
+ * */
+template <class T>
+Node<T>* List::find(Node<T> * ptr, const T &item){
+   if(!ptr) return NULL;
+   if(ptr->data == item)
+      return ptr;
+   return find(ptr->pNext,item);
+}
+
+/**
+ * hInseart private function
+ * Inserts item in front (or in back) of a node
+ * */
+template <class T>
+void List::hInsert( T item, Node<T>* &ptr, bool headInsert = false){
+   if(headInsert || !ptr){
+      Node<T>* newPtr = new Node<T>(item,ptr,ptr->pPrev);
+      ptr=newPtr;
+   }else{
+      Node<T>* newPtr = new Node<T>(item,ptr->pNext);
+      // ptr->pNext=newPtr;
+   }
+   if(newPtr->pNext)
+      newPtr->pNext->pPrev = newPtr;
+   if(newPtr->pPrev)
+      newPtr->pPrev->pNext = newPtr;
+}
+
+/**
+ * copy private function
+ * Creates new linked list of new nodes
+ * Returns the head node.
+ * */
+template <class T>
+Node<T>* List::copy(Node<T>* ptr){
+      if(ptr){
+         Node<T>* nextNode = copy(ptr->pNext);   //create new Node by calling copy(),
+         Node<T>* newNode =  new Node<T>(  
+            ptr->data,        //copy data, not data pointer
+            nextNode          // set it to current new node next.
+         );
+         if(newNode->pNext)
+            newNode->pNext->pPrev = newNode;
+         return newNode;
+      }
+      return 0;
+      
+}
+
+/**
+ * freeData private function
+ * Given the head node of a linked list,
+ * It will loop through and delete every node.
+ * */
+template <class T>
+void List::freeData(Node<T>* &ptr){
+   if(ptr != NULL){
+      freeData(ptr->pNext);
+      delete ptr;
+   }
+   ptr = NULL;
+}
 
 //Constructors: Default constructor (create an empty list) and the copy constructor. If allocation is not possible, the following error will be thrown:
 //ERROR: unable to allocate a new node for a list
@@ -100,46 +204,47 @@ class ListIterator
   public:
    // default constructor
   ListIterator() : p(NULL) {}
-
    // initialize to direct p to some item
-  ListIterator(T * p) : p(p) {}
-
-
+  ListIterator(Node<T> * p) : p(p) {}
    // not equals operator
    bool operator != (const ListIterator & rhs) const
    {
-      return rhs.p != this->p;
+      return rhs.p->data != this->p->data;
    }
-
    // dereference operator
    T & operator * ()
    {
-      return *p;
+      return p->data;
    }
-
    // prefix increment
    ListIterator <T> & operator ++ ()
    {
-      p++;
+      p = p->pNext;
       return *this;
    }
-
    // postfix increment
    ListIterator <T> operator++(int postfix)
    {
       ListIterator tmp(*this);
-      p++;
+      p = p->pNext;
       return tmp;
    }
-   
+   // prefix decrement
+   ListIterator <T> & operator -- ()
+   {
+      p = p->pPrev;
+      return *this;
+   }
+   // postfix decrement
+   ListIterator <T> operator--(int postfix)
+   {
+      ListIterator tmp(*this);
+      p = p->pPrev;
+      return tmp;
+   }
   private:
-   T * p;
+   Node<T> * p;
 };
-
-
-
-
-
 
 #endif //LIST_H
 /***
@@ -159,68 +264,11 @@ class Node
       T data;
       Node<T>*pNext;
       Node<T>*pPrev;
-      Node():data(NULL),pNext(NULL),pPrev(NULL) {}
-      Node(T item):data(item),pNext(NULL),pPrev(NULL) {}
-      Node(T item, Node<T>*next):data(item),pNext(next),pPrev(NULL) {}
-      Node(T item, Node<T>*next,Node<T>*prev):data(item),pNext(next),pPrev(prev) {}
+      Node(                                  ):data(NULL),pNext(NULL),pPrev(NULL) {}
+      Node(T item                            ):data(item),pNext(NULL),pPrev(NULL) {}
+      Node(T item, Node<T>*next              ):data(item),pNext(next),pPrev(NULL) {}
+      Node(T item, Node<T>*next,Node<T>*prev ):data(item),pNext(next),pPrev(prev) {}
 };
-
-/******
- * Find
- * finds the Node wich matches the given item
- * And returns the NodePtr to that node.
- * */
-template <class T>
-Node<T>* find(Node<T> * ptr, const T &iteem){
-   if(!ptr) return NULL;
-   if(ptr->data == item)
-      return ptr;
-   return find(ptr->pNext,item);
-}
-
-/*****
- * Insert
- * Inserts the item in a new node either before or after the NodePtr specified
- * */
-template <class T>
-void insert( T item, Node<T>* &ptr, bool headInsert = false){
-   if(headInsert || !ptr){
-      Node<T>* newPtr = new Node<T>(item,ptr);
-      ptr=newPtr;
-   }else{
-      Node<T>* newPtr = new Node<T>(item,ptr->pNext);
-      ptr->pNext=newPtr;
-   }
-}
-
-/****
- * Copy
- * Copy's a linked list
- * each into new nodes, not just pointers. 
- * */
-template <class T>
-Node<T>* copy(Node<T>* ptr){
-      if(ptr)
-         return new Node<T>(
-            ptr->data,
-            copy(ptr->pNext)
-         );
-      return 0;
-      
-}
-
-/******
- * freeData
- * removes all items from the linked list (deletes them)
- * */
-template <class T>
-void freeData(Node<T>* &ptr){
-   if(ptr != NULL){
-      freeData(ptr->pNext);
-      delete ptr;
-   }
-   ptr = NULL;
-}
 
 /*****
  * OStream Extraction Operator

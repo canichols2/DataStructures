@@ -21,28 +21,29 @@ class List
 
    private: //Methods
       Node<T>* find(Node<T> * ptr, const T &item);
-      void hInsert( T item, Node<T>* &ptr, bool headInsert = false);
+      void hInsert( T item, Node<T>* &ptr);
       Node<T>* copy(Node<T>* ptr);
       void freeData(Node<T>* &ptr);
    public:
-               List()   :pHead(NULL),pTail(NULL);
-               ~List()  {freeData(pHead); numItems = 0;}
-      bool     empty()  {return numItems;}
-      void     clear()  {freeData(pHead); numItems = 0;}
-      int      size()   {return numItems}
-      T&       front()  {return pHead->data}       // ERROR: unable to access data from an empty list
-      T&       back()   {return pTail->data}
-      Node<T>* begin()  {return ListIterator(this->pHead);}
-      Node<T>* rbegin() {return ListIterator(this->pTail);}
-      Node<T>* end()    {return ListIterator();}
-      Node<T>* rend()   {return ListIterator();}
+                           List()   :pHead(NULL),pTail(NULL),numItems(0){}
+                           ~List()  {freeData(pHead); numItems = 0;}
+      bool                 empty()  {return !numItems;}
+      void                 clear()  {freeData(pHead); numItems = 0;}
+      int                  size()   {return numItems;}
+      T&                   front()  {return pHead->data;}       // ERROR: unable to access data from an empty list
+      T&                   back()   {return pTail->data;}
+      ListIterator<T>      begin()  {return ListIterator<T>(this->pHead);}
+      ListIterator<T>      rbegin() {return ListIterator<T>(this->pTail);}
+      ListIterator<T>      end()    {return ListIterator<T>();}
+      ListIterator<T>      rend()   {return ListIterator<T>();}
       
       // Non inline functions
-               List(List oldList);
-      void     insert(ListIterator it,T item);      // ERROR: unable to allocate a new node for a list
-      void     remove(ListIterator it);      // ERROR: unable to remove from an invalid location in a list
-      void     push_front(T item);
-      void     push_back(T item);
+                           List(const List<T>&);
+      ListIterator<T>      insert(ListIterator<T> it,T item);      // ERROR: unable to allocate a new node for a list
+      void                 remove(ListIterator<T> it);      // ERROR: unable to remove from an invalid location in a list
+      void                 push_front(T item);
+      void                 push_back(T item);
+      List<T>&             operator=(const List<T>& rhs);
 };
 
 /**
@@ -50,13 +51,32 @@ class List
  * Copy's a list to a new list.
  * */
 template <class T>
-List::List(List oldList){
-   pHead = copy(oldList->pHead);
+List<T>::List(const List<T>& oldList){
+   numItems = oldList.numItems;
+   pHead = copy(oldList.pHead);
    Node<T>* ptr = pHead;
    while (ptr->pNext){
       ptr=ptr->pNext;
    }
    pTail = ptr;
+}
+
+/***
+ * Assignment Operator Overload.
+ * 
+ * */
+template <class T>
+List<T>& List<T>::operator=(const List<T>& rhs)
+{
+   numItems = rhs.numItems;
+   freeData(pHead);
+   pHead = copy(rhs.pHead);
+   Node<T>* ptr = pHead;
+   while (ptr->pNext){
+      ptr=ptr->pNext;
+   }
+   pTail = ptr;
+   return *this;
 }
 
 /**
@@ -69,12 +89,48 @@ List::List(List oldList){
  * In the case of an allocation error, the following exception will be thrown:
  * */
 template <class T>
-void     List::insert(ListIterator it,T item){      // ERROR: unable to allocate a new node for a list
-   if(it){
-      hInsert(item,it->p,true);
-   }else{
+ListIterator<T> List<T>::insert(ListIterator<T> it,T item){      // ERROR: unable to allocate a new node for a list
+   Node<T>* tmp = new Node<T>(item);
+   if(numItems == 0 || pHead == NULL)
+   {
+      pHead = tmp;
+      pTail = tmp;
 
    }
+   else if(it.p == NULL){
+      //insert at tail
+      pTail->pNext = tmp;
+      tmp->pPrev = pTail;
+      pTail = tmp;
+   }else if(it.p == pHead){
+      //insert at head
+      pHead->pPrev = tmp;
+      tmp->pNext = pHead;
+      pHead = tmp;
+   }else{
+      //insert in the middle
+      tmp->pNext = it.p;
+      tmp->pPrev = it.p->pPrev;
+      tmp->pNext->pPrev = tmp;
+      tmp->pPrev->pNext = tmp;
+   }
+   numItems++;
+}
+
+/**
+ * remove function
+ * takes an iterator, removes the pointer at 
+ * */
+template <class T>
+void     List<T>::remove(ListIterator<T> it){      // ERROR: unable to remove from an invalid location in a list
+   
+   if(it.p == NULL)
+      throw  "ERROR: unable to remove from an invalid location in a list";
+
+   if(it.p == pHead) pHead = it.p->pNext;
+   if(it.p == pTail) pTail = it.p->pPrev;
+   if(it.p->pNext) it.p->pNext->pPrev = it.p->pPrev;
+   if(it.p->pPrev) it.p->pPrev->pNext = it.p->pNext;
 }
 
 /**
@@ -82,12 +138,9 @@ void     List::insert(ListIterator it,T item){      // ERROR: unable to allocate
  * BLANK BLANK BLANK
  * */
 template <class T>
-void     List::remove(ListIterator it){      // ERROR: unable to remove from an invalid location in a list
-   if(*it == pHead) pHead = *it->pNext;
-   if(*it == pTail) pTail = *it->pPrev;
-   if(*it->pNext) *it->pNext->pPrev = *it->pPrev;
-   if(*it->pPrev) *it->pPrev->pNext = *it->pNext;
-
+void     List<T>::push_front(T item)
+{
+insert(begin(), item);
 }
 
 /**
@@ -95,14 +148,10 @@ void     List::remove(ListIterator it){      // ERROR: unable to remove from an 
  * BLANK BLANK BLANK
  * */
 template <class T>
-void     List::push_front(T item);
-
-/**
- * BLANK private function
- * BLANK BLANK BLANK
- * */
-template <class T>
-void     List::push_back(T item);
+void     List<T>::push_back(T item)
+{
+insert(end(), item);
+}
 
 /**
  * find private function
@@ -110,7 +159,7 @@ void     List::push_back(T item);
  * returns null if not found.
  * */
 template <class T>
-Node<T>* List::find(Node<T> * ptr, const T &item){
+Node<T>* List<T>::find(Node<T> * ptr, const T &item){
    if(!ptr) return NULL;
    if(ptr->data == item)
       return ptr;
@@ -122,18 +171,8 @@ Node<T>* List::find(Node<T> * ptr, const T &item){
  * Inserts item in front (or in back) of a node
  * */
 template <class T>
-void List::hInsert( T item, Node<T>* &ptr, bool headInsert = false){
-   if(headInsert || !ptr){
-      Node<T>* newPtr = new Node<T>(item,ptr,ptr->pPrev);
-      ptr=newPtr;
-   }else{
-      Node<T>* newPtr = new Node<T>(item,ptr->pNext);
-      // ptr->pNext=newPtr;
-   }
-   if(newPtr->pNext)
-      newPtr->pNext->pPrev = newPtr;
-   if(newPtr->pPrev)
-      newPtr->pPrev->pNext = newPtr;
+void List<T>::hInsert( T item, Node<T>* &ptr){
+   Node<T>* newPtr;
 }
 
 /**
@@ -142,7 +181,7 @@ void List::hInsert( T item, Node<T>* &ptr, bool headInsert = false){
  * Returns the head node.
  * */
 template <class T>
-Node<T>* List::copy(Node<T>* ptr){
+Node<T>* List<T>::copy(Node<T>* ptr){
       if(ptr){
          Node<T>* nextNode = copy(ptr->pNext);   //create new Node by calling copy(),
          Node<T>* newNode =  new Node<T>(  
@@ -163,7 +202,7 @@ Node<T>* List::copy(Node<T>* ptr){
  * It will loop through and delete every node.
  * */
 template <class T>
-void List::freeData(Node<T>* &ptr){
+void List<T>::freeData(Node<T>* &ptr){
    if(ptr != NULL){
       freeData(ptr->pNext);
       delete ptr;
@@ -207,7 +246,7 @@ class ListIterator
    // initialize to direct p to some item
   ListIterator(Node<T> * p) : p(p) {}
    // not equals operator
-   bool operator != (const ListIterator & rhs) const
+   bool operator != (const ListIterator<T> & rhs) const
    {
       return rhs.p->data != this->p->data;
    }
@@ -242,6 +281,8 @@ class ListIterator
       p = p->pPrev;
       return tmp;
    }
+   friend ListIterator<T>  List<T>::insert(ListIterator<T> it,T item);
+   friend void             List<T>::remove(ListIterator<T> it);
   private:
    Node<T> * p;
 };

@@ -22,7 +22,8 @@
    "ostream": "cpp",
    "istream": "cpp",
    "initializer_list": "cpp",
-   "fstream": "cpp"
+   "fstream": "cpp",
+   "utility": "cpp"
 },
 "editor.tabSize": 3,
 

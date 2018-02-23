@@ -4,99 +4,121 @@
    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
    "version": "0.2.0",
    "configurations": [
-
       {
-          "name": "Week06",
-          "type": "cppdbg",
-          "request": "launch",
-          "program": "${workspaceFolder}/week06/test.exe",
-          "args": [],
-          "stopAtEntry": false,
-          "cwd": "${workspaceFolder}/week06",
-          "environment": [],
-          "externalConsole": true,
-          "MIMode": "gdb",
-          "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
-          "setupCommands": [
-              {
-               "console":"integratedTerminal",
-                "description": "Enable pretty-printing for gdb",
-                "text": "-enable-pretty-printing",
-                "ignoreFailures": true
-             }
-          ],
-          "preLaunchTask": "buildCppW6",
-          "internalConsoleOptions": "openOnFirstSessionStart"
-       },{
-             "name": "Week05",
-             "type": "cppdbg",
-             "request": "launch",
-             "program": "${workspaceFolder}/week05/test.exe",
-             "args": [],
-             "stopAtEntry": false,
-             "cwd": "${workspaceFolder}/week05",
-             "environment": [],
-             "externalConsole": true,
-             "MIMode": "gdb",
-             "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
-             "setupCommands": [
-                 {
-                  "console":"integratedTerminal",
-                   "description": "Enable pretty-printing for gdb",
-                   "text": "-enable-pretty-printing",
-                   "ignoreFailures": true
-                }
-             ],
-             "preLaunchTask": "buildCppW5",
-             "internalConsoleOptions": "openOnFirstSessionStart"
-          },{
-        "name": "Week04",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "${workspaceFolder}/week04/test.exe",
-        "args": [],
-        "stopAtEntry": false,
-        "cwd": "${workspaceFolder}/week04",
-        "environment": [],
-        "externalConsole": true,
-        "MIMode": "gdb",
-        "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
-        "setupCommands": [
+         "name": "Week07",
+         "type": "cppdbg",
+         "request": "launch",
+         "program": "${workspaceFolder}/week07/test.exe",
+         "args": [],
+         "stopAtEntry": false,
+         "cwd": "${workspaceFolder}/week07",
+         "environment": [],
+         "externalConsole": true,
+         "MIMode": "gdb",
+         "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
+         "setupCommands": [
             {
-             "console":"integratedTerminal",
-              "description": "Enable pretty-printing for gdb",
-              "text": "-enable-pretty-printing",
-              "ignoreFailures": true
-           }
-        ],
-        "preLaunchTask": "buildCppW4",
-        "internalConsoleOptions": "openOnFirstSessionStart"
-     },
-
-{
-   "name": "Week03",
-   "type": "cppdbg",
-   "request": "launch",
-   "program": "${workspaceFolder}/week03/test.exe",
-   "args": [],
-   "stopAtEntry": false,
-   "cwd": "${workspaceFolder}/week03",
-   "environment": [],
-   "externalConsole": true,
-   "MIMode": "gdb",
-   "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
-   "setupCommands": [
-       {
-        "console":"integratedTerminal",
-         "description": "Enable pretty-printing for gdb",
-         "text": "-enable-pretty-printing",
-         "ignoreFailures": true
-      }
-   ],
-   "preLaunchTask": "buildCppW3",
-   "internalConsoleOptions": "openOnFirstSessionStart"
-},
-
+               "console": "integratedTerminal",
+               "description": "Enable pretty-printing for gdb",
+               "text": "-enable-pretty-printing",
+               "ignoreFailures": true
+            }
+         ],
+         "preLaunchTask": "buildCppW7",
+         "internalConsoleOptions": "openOnFirstSessionStart"
+      },
+      {
+         "name": "Week06",
+         "type": "cppdbg",
+         "request": "launch",
+         "program": "${workspaceFolder}/week06/test.exe",
+         "args": [],
+         "stopAtEntry": false,
+         "cwd": "${workspaceFolder}/week06",
+         "environment": [],
+         "externalConsole": true,
+         "MIMode": "gdb",
+         "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
+         "setupCommands": [
+            {
+               "console": "integratedTerminal",
+               "description": "Enable pretty-printing for gdb",
+               "text": "-enable-pretty-printing",
+               "ignoreFailures": true
+            }
+         ],
+         "preLaunchTask": "buildCppW6",
+         "internalConsoleOptions": "openOnFirstSessionStart"
+      },
+      {
+         "name": "Week05",
+         "type": "cppdbg",
+         "request": "launch",
+         "program": "${workspaceFolder}/week05/test.exe",
+         "args": [],
+         "stopAtEntry": false,
+         "cwd": "${workspaceFolder}/week05",
+         "environment": [],
+         "externalConsole": true,
+         "MIMode": "gdb",
+         "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
+         "setupCommands": [
+            {
+               "console": "integratedTerminal",
+               "description": "Enable pretty-printing for gdb",
+               "text": "-enable-pretty-printing",
+               "ignoreFailures": true
+            }
+         ],
+         "preLaunchTask": "buildCppW5",
+         "internalConsoleOptions": "openOnFirstSessionStart"
+      },
+      {
+         "name": "Week04",
+         "type": "cppdbg",
+         "request": "launch",
+         "program": "${workspaceFolder}/week04/test.exe",
+         "args": [],
+         "stopAtEntry": false,
+         "cwd": "${workspaceFolder}/week04",
+         "environment": [],
+         "externalConsole": true,
+         "MIMode": "gdb",
+         "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
+         "setupCommands": [
+            {
+               "console": "integratedTerminal",
+               "description": "Enable pretty-printing for gdb",
+               "text": "-enable-pretty-printing",
+               "ignoreFailures": true
+            }
+         ],
+         "preLaunchTask": "buildCppW4",
+         "internalConsoleOptions": "openOnFirstSessionStart"
+      },
+      {
+         "name": "Week03",
+         "type": "cppdbg",
+         "request": "launch",
+         "program": "${workspaceFolder}/week03/test.exe",
+         "args": [],
+         "stopAtEntry": false,
+         "cwd": "${workspaceFolder}/week03",
+         "environment": [],
+         "externalConsole": true,
+         "MIMode": "gdb",
+         "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
+         "setupCommands": [
+            {
+               "console": "integratedTerminal",
+               "description": "Enable pretty-printing for gdb",
+               "text": "-enable-pretty-printing",
+               "ignoreFailures": true
+            }
+         ],
+         "preLaunchTask": "buildCppW3",
+         "internalConsoleOptions": "openOnFirstSessionStart"
+      },
       {
          "name": "Week02",
          "type": "cppdbg",
@@ -110,8 +132,8 @@
          "MIMode": "gdb",
          "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
          "setupCommands": [
-             {
-              "console":"integratedTerminal",
+            {
+               "console": "integratedTerminal",
                "description": "Enable pretty-printing for gdb",
                "text": "-enable-pretty-printing",
                "ignoreFailures": true
@@ -120,27 +142,27 @@
          "preLaunchTask": "buildCppW2",
          "internalConsoleOptions": "openOnFirstSessionStart"
       },
-    {
-       "name": "Week01",
-       "type": "cppdbg",
-       "request": "launch",
-       "program": "c:/projects/datastructures/week01/test.exe",
-       "args": [],
-       "stopAtEntry": false,
-       "cwd": "${workspaceFolder}/week01",
-       "environment": [],
-       "externalConsole": true,
-       "MIMode": "gdb",
-       "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
-       "setupCommands": [
-          {
-             "description": "Enable pretty-printing for gdb",
-             "text": "-enable-pretty-printing",
-             "ignoreFailures": true
-          }
-       ],
-       "preLaunchTask": "buildCppW1",
-       "internalConsoleOptions": "openOnFirstSessionStart"
-    }
+      {
+         "name": "Week01",
+         "type": "cppdbg",
+         "request": "launch",
+         "program": "c:/projects/datastructures/week01/test.exe",
+         "args": [],
+         "stopAtEntry": false,
+         "cwd": "${workspaceFolder}/week01",
+         "environment": [],
+         "externalConsole": true,
+         "MIMode": "gdb",
+         "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
+         "setupCommands": [
+            {
+               "description": "Enable pretty-printing for gdb",
+               "text": "-enable-pretty-printing",
+               "ignoreFailures": true
+            }
+         ],
+         "preLaunchTask": "buildCppW1",
+         "internalConsoleOptions": "openOnFirstSessionStart"
+      }
    ]
 }

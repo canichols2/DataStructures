@@ -1,49 +1,49 @@
 {
-   // See https://go.microsoft.com/fwlink/?LinkId=733558
-   // for the documentation about the tasks.json format
-   "version": "2.0.0",
-   "tasks": [
-      {
-         "label": "buildCppW6",
-         "type": "shell",
-        //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
-         "command": "pwd;g++ -g -o ./week06/test.exe ./week06/week06.cpp "
-      },
-      {
-         "label": "buildCppW5",
-         "type": "shell",
-        //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
-         "command": "pwd;g++ -g -o ./week05/test.exe ./week05/week05.cpp ./week05/card.cpp  ./week05/goFish.cpp"
-      },
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
     {
-       "label": "buildCppW4",
-       "type": "shell",
+      "label": "buildCppW7",
+      "type": "shell",
       //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
-       "command": "pwd;g++ -g -o ./week04/test.exe ./week04/week04.cpp ./week04/nowServing.cpp"
-    },
-      {
-         "label": "buildCppW3",
-         "type": "shell",
-        //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
-         "command": "pwd;g++ -g -o ./week03/test.exe ./week03/week03.cpp ./week03/dollars.cpp ./week03/stock.cpp"
-      },
-      {
-         "label": "buildCppW2",
-         "type": "shell",
-        //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
-         "command": "pwd;g++ -g ./week02/week*.cpp ./week02/infix.cpp -o ./week02/test.exe"
-      },
-    {
-       "label": "buildCppW1",
-       "type": "shell",
-      //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
-       "command": "pwd;g++ -g ./week01/week*.cpp -o ./week01/test.exe"
+      "command": "pwd;g++ -g -o ./week07/test.exe ./week07/week07.cpp ./week07/fibonacci.cpp"
     },
     {
-       "label": "buildCpp",
-       "type": "shell",
+      "label": "buildCppW5",
+      "type": "shell",
       //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
-       "command": "pwd;g++ -g ./week02/week*.cpp ./week02/infix.cpp -o ./week02/test.exe"
+      "command": "pwd;g++ -g -o ./week05/test.exe ./week05/week05.cpp ./week05/card.cpp  ./week05/goFish.cpp"
+    },
+    {
+      "label": "buildCppW4",
+      "type": "shell",
+      //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
+      "command": "pwd;g++ -g -o ./week04/test.exe ./week04/week04.cpp ./week04/nowServing.cpp"
+    },
+    {
+      "label": "buildCppW3",
+      "type": "shell",
+      //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
+      "command": "pwd;g++ -g -o ./week03/test.exe ./week03/week03.cpp ./week03/dollars.cpp ./week03/stock.cpp"
+    },
+    {
+      "label": "buildCppW2",
+      "type": "shell",
+      //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
+      "command": "pwd;g++ -g ./week02/week*.cpp ./week02/infix.cpp -o ./week02/test.exe"
+    },
+    {
+      "label": "buildCppW1",
+      "type": "shell",
+      //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
+      "command": "pwd;g++ -g ./week01/week*.cpp -o ./week01/test.exe"
+    },
+    {
+      "label": "buildCpp",
+      "type": "shell",
+      //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
+      "command": "pwd;g++ -g ./week02/week*.cpp ./week02/infix.cpp -o ./week02/test.exe"
     }
-   ]
+  ]
 }

@@ -4,3 +4,5 @@ a.exe
 *.tar
 *.o
 *~
+.vs
+week07/CppProperties.json

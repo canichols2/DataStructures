@@ -131,6 +131,7 @@ void     List<T>::remove(ListIterator<T> it){      // ERROR: unable to remove fr
    if(it.p == pTail) pTail = it.p->pPrev;
    if(it.p->pNext) it.p->pNext->pPrev = it.p->pPrev;
    if(it.p->pPrev) it.p->pPrev->pNext = it.p->pNext;
+   numItems--;
 }
 
 /**
@@ -246,8 +247,11 @@ class ListIterator
    // initialize to direct p to some item
   ListIterator(Node<T> * p) : p(p) {}
    // not equals operator
-   bool operator != (const ListIterator<T> & rhs) const
+   bool operator != (const ListIterator<T> &rhs) const
    {
+      //handle cases of null pointers. so it doesn't dereference null pointers.
+      if((this->p == NULL && rhs.p == NULL) || (this->p != NULL && rhs.p != NULL)) return false;
+      if((this->p == NULL && rhs.p != NULL) || (this->p != NULL && rhs.p == NULL)) return true;
       return rhs.p->data != this->p->data;
    }
    // dereference operator

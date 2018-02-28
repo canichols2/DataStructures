@@ -256,6 +256,7 @@ ostream & operator << (ostream & out, List <T> & rhs)
  * TEST ITERATE
  * We will test the iterators. We will go through the
  * list forwards and backwards
+ * 
  ******************************************/
 void testIterate()
 {

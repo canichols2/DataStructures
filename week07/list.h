@@ -26,9 +26,9 @@ class List
       void freeData(Node<T>* &ptr);
    public:
                            List()   :pHead(NULL),pTail(NULL),numItems(0){}
-                           ~List()  {freeData(pHead); numItems = 0;}
+                           ~List()  {clear();}
       bool                 empty()  {return !numItems;}
-      void                 clear()  {freeData(pHead); numItems = 0;}
+      void                 clear()  {freeData(pHead); numItems = 0;pTail = NULL;}
       int                  size()   {return numItems;}
       T&                   front()  {return pHead->data;}       // ERROR: unable to access data from an empty list
       T&                   back()   {return pTail->data;}

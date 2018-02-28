@@ -88,7 +88,7 @@ ostream& operator << (ostream& out,const  WholeNumber &rhs)
       if(it != NULL)
          out<<",";
    }
-      
+
    return out;
 }
 #endif

@@ -1,13 +1,14 @@
 ###############################################################
 # Program:
 #     Week 07, LIST
-#     Brother XXXXX, CS235
+#     Brother Ercanbrack, CS235
 # Author:
-#     <your name here>
+#     Cody Nichols
 # Summary:
-#     <put a description here>
+#     List using doublly linked list
+#		Fibonacci code
 # Time:
-#     <how long did it take to complete this program>?
+#     4-6 hours
 ###############################################################
 
 ##############################################################

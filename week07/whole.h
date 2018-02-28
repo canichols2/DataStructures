@@ -1,11 +1,14 @@
 #ifndef WHOLE
 #define WHOLE
 #include <iostream>
-// #include "fibonacci.h"   // for fibonacci() prototype
 #include "list.h"        // for LIST
 using namespace std;
 
-// template <class T>
+/***********************************
+ * WholeNumber class
+ * used to hide the implementation.
+ * Uses linked lists to have infinate sized ints.
+ * *********************************/
 class WholeNumber
 {
    private:
@@ -15,7 +18,6 @@ class WholeNumber
             return *it;
          return 0;
       }
-      // int number;
    public:
       WholeNumber(){
          number.push_back(0);
@@ -27,6 +29,11 @@ class WholeNumber
          //calls list assignment operator
          number = num.number;
       }
+
+      /**********************
+       * Whole Number += Operator overload
+       * Used to add one whole number to another
+       * ****/
       WholeNumber& operator+=(WholeNumber& rhs){
          ListIterator<int> itLhs = number.rbegin();
          ListIterator<int> itRhs = rhs.number.rbegin();
@@ -44,7 +51,6 @@ class WholeNumber
             newList.push_front(over);
          }
          number = newList;
-         // number += rhs.number;
          return *this;
       }
       WholeNumber& operator=( WholeNumber& rhs){
@@ -59,7 +65,10 @@ class WholeNumber
       friend ostream& operator << (ostream& out,const  WholeNumber &rhs);
 };
 
-
+/**********************************
+ * OSTREAM Extraction Operator Overload
+ * used to cout the whole number as a string.
+ * ********************************/
 ostream& operator << (ostream& out,const  WholeNumber &rhs)
 { 
    WholeNumber tmp = WholeNumber(rhs); 

@@ -10,7 +10,13 @@ class ListIterator;
 template <class T>
 class Node;
 
-
+/*******************************
+ * List Class
+ * List of nodes. uses linked list
+ * User isn't meant to know this
+ * uses linked lists, but just uses it
+ * like a deque.
+ * *******************************/
 template <class T>
 class List
 {
@@ -135,8 +141,8 @@ void     List<T>::remove(ListIterator<T> it){      // ERROR: unable to remove fr
 }
 
 /**
- * BLANK private function
- * BLANK BLANK BLANK
+ * Push_Front function
+ * add item to front of list
  * */
 template <class T>
 void     List<T>::push_front(T item)
@@ -145,8 +151,8 @@ insert(begin(), item);
 }
 
 /**
- * BLANK private function
- * BLANK BLANK BLANK
+ * push_back function
+ * add item to end of list
  * */
 template <class T>
 void     List<T>::push_back(T item)
@@ -158,6 +164,7 @@ insert(end(), item);
  * find private function
  * searches list, returns ptr to node of matching item
  * returns null if not found.
+ * Probably not used, but nice to have.
  * */
 template <class T>
 Node<T>* List<T>::find(Node<T> * ptr, const T &item){
@@ -170,6 +177,7 @@ Node<T>* List<T>::find(Node<T> * ptr, const T &item){
 /**
  * hInseart private function
  * Inserts item in front (or in back) of a node
+ * Ended up not using. 
  * */
 template <class T>
 void List<T>::hInsert( T item, Node<T>* &ptr){

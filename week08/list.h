@@ -47,7 +47,7 @@ class List
                            List(const List<T>&);
       ListIterator<T>      insert(ListIterator<T> it,T item);// ERROR: unable to allocate a new node for a list
       ListIterator<T>      insertOrdered(T item)    {  insertOrdered(this->begin(),item);    }
-      ListIterator<T>      rInsertOrdered(T item)   {  rinsertOrdered(this->rbegin(),item);    }
+      ListIterator<T>      rInsertOrdered(T item)   {  rInsertOrdered(this->rbegin(),item);    }
       ListIterator<T>      insertOrdered(ListIterator<T> it,T item); // ERROR: unable to allocate a new node for a list
       ListIterator<T>      rInsertOrdered(ListIterator<T> it,T item);// ERROR: unable to allocate a new node for a list
       void                 remove(ListIterator<T> it);       // ERROR: unable to remove from an invalid location in a list
@@ -129,9 +129,9 @@ ListIterator<T> List<T>::insert(ListIterator<T> it,T item){      // ERROR: unabl
 
 
 template <class T>
-ListIterator<T>      List<T>::insertOrdered(ListIterator<T> it,T item) // ERROR: unable to allocate a new node for a list
+ListIterator<T>      List<T>::insertOrdered(ListIterator<T> it,T item) 
 {
-   if(it->p == NULL || item <= *it){
+   if(it.p == NULL || item <= *it){
       return insert(it,item);
    }else{
       it++;
@@ -139,15 +139,15 @@ ListIterator<T>      List<T>::insertOrdered(ListIterator<T> it,T item) // ERROR:
    }
 }
 template <class T>
-ListIterator<T>      List<T>::rInsertOrdered(ListIterator<T> it,T item)// ERROR: unable to allocate a new node for a list
+ListIterator<T>      List<T>::rInsertOrdered(ListIterator<T> it,T item)
 {
 
-   if(it->p == NULL || item >= *it){
+   if(it.p == NULL || item >= *it){
       it++;
       return insert(it,item);
    }else{
       it--;
-      return rinsertOrdered(it,item);
+      return rInsertOrdered(it,item);
    }
 }
 

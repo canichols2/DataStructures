@@ -57,7 +57,7 @@ public:
 };
 
 /*****************************************************
- * PAIR INSERTION
+ * PAIR EXTRACTION
  * Display a pair for debug purposes
  ****************************************************/
 template <class T1, class T2>
@@ -68,7 +68,7 @@ inline std::ostream & operator << (std::ostream & out, const Pair <T1, T2> & rhs
 }
 
 /*****************************************************
- * PAIR EXTRACTION
+ * PAIR INSERTION
  * input a pair
  ****************************************************/
 template <class T1, class T2>

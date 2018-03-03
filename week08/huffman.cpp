@@ -15,6 +15,9 @@
 #include "huffman.h"       // for HUFFMAN() prototype
 using namespace std;
 void readTree(BinaryNode<Pair<float,string>>* node,string huffStr);
+// template <class T>
+// ostream & operator << (ostream & out, const BinaryNode <Pair<float,string>>* & rhs);
+// ostream & operator << (ostream & out, const Pair<float,string> & rhs);
 
 /*******************************************
  * HUFFMAN
@@ -38,6 +41,12 @@ void huffman(string fileName)
    {
       //I created a new insert to sort as it's inserting.
       sortedNodes.insertOrdered( new BinaryNode<Pair<float,string>>(  Pair<float,string>(tmpF,tmpS))  );
+      ListIterator<BinaryNode<Pair<float,string>>*> it = sortedNodes.begin();
+      cout << sortedNodes <<endl;
+      // while(it != NULL){
+      //    cout << *it << endl;
+      //    it++;
+      // }
    }
    //for each Node in List
       //Until there is only one left to sort into the tree
@@ -60,6 +69,7 @@ void huffman(string fileName)
       node->addLeft(tmp1);
       node->addRight(tmp2);
       sortedNodes.insertOrdered(node);
+      // cout << node;
    }
 
    //set key values
@@ -86,3 +96,5 @@ void readTree(BinaryNode<Pair<float,string>>* node,string huffStr){
       cout << node->data.second << " = " << huffStr<<endl;
    }
 }
+
+

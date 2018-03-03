@@ -35,6 +35,15 @@ public:
    // create a node and add it to the left/right
    void addLeft (const T & t) throw (const char *);
    void addRight(const T & t) throw (const char *);
+
+   //Boolean Operatorns
+
+   bool operator >  (const BinaryNode<T> & rhs) const { return data >  rhs.data; }
+   bool operator >= (const BinaryNode<T> & rhs) const { return data >= rhs.data; }
+   bool operator <  (const BinaryNode<T> & rhs) const { return data <  rhs.data; }
+   bool operator <= (const BinaryNode<T> & rhs) const { return data <= rhs.data; }
+   bool operator == (const BinaryNode<T> & rhs) const { return data == rhs.data; }
+   bool operator != (const BinaryNode<T> & rhs) const { return data != rhs.data; }
    
    // since no validation is done, everything is public
    BinaryNode <T> * pLeft;

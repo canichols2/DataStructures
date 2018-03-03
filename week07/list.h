@@ -45,8 +45,12 @@ class List
       
       // Non inline functions
                            List(const List<T>&);
-      ListIterator<T>      insert(ListIterator<T> it,T item);      // ERROR: unable to allocate a new node for a list
-      void                 remove(ListIterator<T> it);      // ERROR: unable to remove from an invalid location in a list
+      ListIterator<T>      insert(ListIterator<T> it,T item);// ERROR: unable to allocate a new node for a list
+      ListIterator<T>      insertOrdered(T item)    {  insertOrdered(this->begin(),item);    }
+      ListIterator<T>      rInsertOrdered(T item)   {  rinsertOrdered(this->rbegin(),item);    }
+      ListIterator<T>      insertOrdered(ListIterator<T> it,T item); // ERROR: unable to allocate a new node for a list
+      ListIterator<T>      rInsertOrdered(ListIterator<T> it,T item);// ERROR: unable to allocate a new node for a list
+      void                 remove(ListIterator<T> it);       // ERROR: unable to remove from an invalid location in a list
       void                 push_front(T item);
       void                 push_back(T item);
       List<T>&             operator=(const List<T>& rhs);
@@ -122,6 +126,31 @@ ListIterator<T> List<T>::insert(ListIterator<T> it,T item){      // ERROR: unabl
    }
    numItems++;
 }
+
+
+template <class T>
+ListIterator<T>      List<T>::insertOrdered(ListIterator<T> it,T item) // ERROR: unable to allocate a new node for a list
+{
+   if(it->p == NULL || item <= *it){
+      return insert(it,item);
+   }else{
+      it++;
+      return insertOrdered(it,item);
+   }
+}
+template <class T>
+ListIterator<T>      List<T>::rInsertOrdered(ListIterator<T> it,T item)// ERROR: unable to allocate a new node for a list
+{
+
+   if(it->p == NULL || item >= *it){
+      it++;
+      return insert(it,item);
+   }else{
+      it--;
+      return rinsertOrdered(it,item);
+   }
+}
+
 
 /**
  * remove function
@@ -276,6 +305,8 @@ class ListIterator
       return tmp;
    }
    friend ListIterator<T>  List<T>::insert(ListIterator<T> it,T item);
+   friend ListIterator<T>  List<T>::insertOrdered(ListIterator<T> it,T item);
+   friend ListIterator<T>  List<T>::rInsertOrdered(ListIterator<T> it,T item);
    friend void             List<T>::remove(ListIterator<T> it);
   private:
    Node<T> * p;

@@ -7,10 +7,11 @@
  * Summary:
  *    This program will implement the huffman() function
  ************************************************************************/
-
+#include <string>
+using namespace std;
 #ifndef HUFFMAN_H
 #define HUFFMAN_H
 
-void huffman();
+void huffman(string fileName);
 
 #endif // HUFFMAN_h

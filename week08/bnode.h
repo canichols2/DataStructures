@@ -13,6 +13,13 @@ template <class T>
 class BinaryNode
 {
 public:
+
+   //Basic Constructors
+   BinaryNode():data(NULL),pLeft(NULL),pRight(NULL),pParent(NULL){}
+   BinaryNode(const T& t):data(t),pLeft(NULL),pRight(NULL),pParent(NULL){}
+   BinaryNode(const T& t,BinaryNode <T> * pNode):data(t),pLeft(NULL),pRight(NULL),pParent(pNode){}
+   ~BinaryNode(){deleteBinaryTree(this);}
+
    // return size (i.e. number of nodes in tree)
    int size() const
    {
@@ -35,5 +42,80 @@ public:
    BinaryNode <T> * pParent;
    T data;
 };
+
+/*****************
+ * addLeft method.
+ * implementation of method 
+ * that assigns the node in the left pointer, 
+ * and sets the child pointer to this.
+ *****************/
+template <class T>
+void BinaryNode<T>::addLeft (BinaryNode <T> * pNode){
+   pLeft = pNode;
+   pNode->pParent = this;
+}
+
+/*****************
+ * addRight method.
+ * implementation of method 
+ * that assigns the node in the Right pointer, 
+ * and sets the child pointer to this.
+ *****************/
+template <class T>
+void BinaryNode<T>::addRight (BinaryNode <T> * pNode){
+   pRight = pNode;
+   pNode->pParent = this;
+}
+
+/*****************
+ * addLeft method.
+ * implementation of method that creates a new node, 
+ * puts it in the left pointer, 
+ * and sets the child pointer to this.
+ * ERROR: Unable to allocate a node
+ *****************/
+template <class T>
+void BinaryNode<T>::addLeft (const T & t) throw (const char *){
+   try{
+      BinaryNode<T> *tmp = new BinaryNode<T>(t);
+      addLeft(tmp);
+   }
+   catch(std::bad_alloc){
+      throw "ERROR: Unable to allocate a node";
+   }
+
+}
+
+/*****************
+ * addRight method.
+ * implementation of method that creates a new node, 
+ * puts it in the Right pointer, 
+ * and sets the child pointer to this.
+ * ERROR: Unable to allocate a node
+ *****************/
+template <class T>
+void BinaryNode<T>::addRight (const T & t) throw (const char *){
+   try{
+      BinaryNode<T> *tmp = new BinaryNode<T>(t,this);
+      addRight(tmp);
+   }
+   catch(std::bad_alloc){
+      throw "ERROR: Unable to allocate a node";
+   }
+
+}
+
+/**********************
+ * delete.
+ * Empty's the Node Tree recursively, then delete's itself. 
+ * this is an O(2^n)
+ * ***********************/
+template <class T>
+void deleteBinaryTree(BinaryNode<T> * pNode){
+  if (pNode->pLeft== NULL) deleteBinaryTree(pNode->pLeft);
+  if (pNode->pRight == NULL) deleteBinaryTree(pNode->pRight);
+   delete pNode;
+}
+
 
 #endif // BNODE_H

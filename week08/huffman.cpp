@@ -14,9 +14,9 @@
 #include <fstream>
 #include "huffman.h"       // for HUFFMAN() prototype
 using namespace std;
-void readTree(BinaryNode<Pair<float,string>>* node,string huffStr);
+void readTree(BinaryNode<Pair<float,string> >* node,string huffStr);
 // template <class T>
-// ostream & operator << (ostream & out, const BinaryNode <Pair<float,string>>* & rhs);
+// ostream & operator << (ostream & out, const BinaryNode <Pair<float,string> >* & rhs);
 // ostream & operator << (ostream & out, const Pair<float,string> & rhs);
 
 /*******************************************
@@ -33,16 +33,16 @@ void huffman(string fileName)
    //          string//Strings
    //          > 
    //       >*
-   //    > sortedNodes = List<BinaryNode<Pair<float,string>>*>();
-   // List<Pair<float,string>> sortedThings = List<Pair<float,string>>();
+   //    > sortedNodes = List<BinaryNode<Pair<float,string> >*>();
+   // List<Pair<float,string> > sortedThings = List<Pair<float,string> >();
    float tmpF;
    string tmpS;
    ifstream file(fileName);
    while(file>>tmpS>>tmpF)
    {
       //I created a new insert to sort as it's inserting.
-      huffObj.insertOrdered( new BinaryNode<Pair<float,string>>(  Pair<float,string>(tmpF,tmpS))  );
-      // ListIterator<BinaryNode<Pair<float,string>>*> it = sortedNodes.begin();
+      huffObj.insertOrdered( new BinaryNode<Pair<float,string> >(  Pair<float,string>(tmpF,tmpS))  );
+      // ListIterator<BinaryNode<Pair<float,string> >*> it = sortedNodes.begin();
       // cout << huffObj <<endl;
       // while(it != NULL){
       //    cout << *it << endl;
@@ -78,7 +78,7 @@ void huffman(string fileName)
  * cout when you reach the end of the tree
  * str = 11101
  * ******************/
-// void readTree(BinaryNode<Pair<float,string>>* node,string huffStr){
+// void readTree(BinaryNode<Pair<float,string> >* node,string huffStr){
 //    if(node->pLeft != NULL && node->pRight != NULL){
 //       readTree(node->pLeft,huffStr +"0");
 //       readTree(node->pRight,huffStr +"1");

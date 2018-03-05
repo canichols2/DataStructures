@@ -18,17 +18,92 @@ using namespace std;
 void huffman(string fileName);
 
 
+class huff
+{
+      private:
+         List<BinaryNode<Pair<float,string>>*> orderedList;
+         void readTree(BinaryNode<Pair<float,string>>* node,string huffStr)
+         {
+            if(node->pLeft != NULL && node->pRight != NULL){
+               readTree(node->pLeft,huffStr +"0");
+               readTree(node->pRight,huffStr +"1");
+            }else{
+               cout << node->data.second << " = " << huffStr<<endl;
+            }
+         }
+      public:
+      huff():orderedList(){}
+
+      void createTree(){
+         while (orderedList.size() > 1)
+         {
+               string tmpStr = "";
+               BinaryNode<Pair<float,string>>* tmp1 =orderedList.front();      orderedList.remove(orderedList.begin());
+               BinaryNode<Pair<float,string>>* tmp2 =orderedList.front();      orderedList.remove(orderedList.begin());
+               BinaryNode<Pair<float,string>>* node = 
+               new BinaryNode<Pair<float,string>>(
+                     Pair<float,string>(tmp1->data.first +tmp2->data.first,tmpStr)
+                     );
+               node->addLeft(tmp1);
+               node->addRight(tmp2);
+               orderedList.insertOrdered(node);
+               // cout << node;
+         }
+      }
+      void readTree()
+      {
+         readTree(orderedList.front(),"");
+      }
+
+      ListIterator<BinaryNode<Pair<float,string>>*> insertOrdered(BinaryNode<Pair<float,string>>* item){
+            return insertOrdered(orderedList.begin(),item);
+      }
+      ListIterator<BinaryNode<Pair<float,string>>*> insertOrdered(ListIterator<BinaryNode<Pair<float,string>>*> it,BinaryNode<Pair<float,string>>* item) 
+      {
+            if(
+               !(
+               it != NULL) || 
+               item <= *it)
+            {
+                  return orderedList.insert(it,item);
+            }else{
+                  it++;
+                  return insertOrdered(it,item);
+            }
+      }
+      ListIterator<BinaryNode<Pair<float,string>>*> rInsertOrdered(BinaryNode<Pair<float,string>>* item){
+            return rInsertOrdered(orderedList.rbegin(),item);
+      }
+      ListIterator<BinaryNode<Pair<float,string>>*> rInsertOrdered(ListIterator<BinaryNode<Pair<float,string>>*> it,BinaryNode<Pair<float,string>>* item)
+      {
+            if(!(it != NULL)  || item >= *it){
+                  it++;
+                  return orderedList.insert(it,item);
+            }else{
+                  it--;
+                  return rInsertOrdered(it,item);
+            }
+      }
+
+
+};
+
+
+
+
+
+
 
 
 //Temporary non-member functions to output BinaryNode and Pair
 template <class T>
-ostream & operator << (ostream & out, const BinaryNode<T>* & rhs){
-   "  { D:{lBN}{rBN} }  ";
-   out << "{"<<rhs->data<<":"<<rhs->pLeft<<":"<<rhs->pRight<<" ";
-   // out << rhs->data << " ";
+ostream & operator << (ostream & out, BinaryNode<T>* & rhs){
+   // "  { D:{lBN}{rBN} }  ";
+   // out << "{"<<rhs->data<<":"<<rhs->pLeft<<":"<<rhs->pRight<<" ";
+   if(rhs != NULL)
+      out <<rhs->pLeft<<rhs->data<<" "<<rhs->pRight;
    return out;
 }
-// Pair<float,string>
 
 
 /*****************************************

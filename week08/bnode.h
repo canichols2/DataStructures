@@ -18,7 +18,7 @@ public:
    BinaryNode():data(NULL),pLeft(NULL),pRight(NULL),pParent(NULL){}
    BinaryNode(const T& t):data(t),pLeft(NULL),pRight(NULL),pParent(NULL){}
    BinaryNode(const T& t,BinaryNode <T> * pNode):data(t),pLeft(NULL),pRight(NULL),pParent(pNode){}
-   ~BinaryNode(){deleteBinaryTree(this);}
+   ~BinaryNode(){}
 
    // return size (i.e. number of nodes in tree)
    int size() const
@@ -61,6 +61,7 @@ public:
 template <class T>
 void BinaryNode<T>::addLeft (BinaryNode <T> * pNode){
    pLeft = pNode;
+   if(pNode == NULL)return;
    pNode->pParent = this;
 }
 
@@ -73,6 +74,7 @@ void BinaryNode<T>::addLeft (BinaryNode <T> * pNode){
 template <class T>
 void BinaryNode<T>::addRight (BinaryNode <T> * pNode){
    pRight = pNode;
+   if(pNode == NULL)return;
    pNode->pParent = this;
 }
 
@@ -121,10 +123,14 @@ void BinaryNode<T>::addRight (const T & t) throw (const char *){
  * ***********************/
 template <class T>
 void deleteBinaryTree(BinaryNode<T> * pNode){
-  if (pNode->pLeft== NULL) deleteBinaryTree(pNode->pLeft);
-  if (pNode->pRight == NULL) deleteBinaryTree(pNode->pRight);
-   delete pNode;
+   if(pNode != NULL)
+   {
+      deleteBinaryTree(pNode->pLeft);
+      deleteBinaryTree(pNode->pRight);
+      delete pNode;
+   }
 }
+
 
 
 #endif // BNODE_H

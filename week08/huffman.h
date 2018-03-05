@@ -21,8 +21,8 @@ void huffman(string fileName);
 class huff
 {
       private:
-         List<BinaryNode<Pair<float,string>>*> orderedList;
-         void readTree(BinaryNode<Pair<float,string>>* node,string huffStr)
+         List<BinaryNode<Pair<float,string> >*> orderedList;
+         void readTree(BinaryNode<Pair<float,string> >* node,string huffStr)
          {
             if(node->pLeft != NULL && node->pRight != NULL){
                readTree(node->pLeft,huffStr +"0");
@@ -38,10 +38,10 @@ class huff
          while (orderedList.size() > 1)
          {
                string tmpStr = "";
-               BinaryNode<Pair<float,string>>* tmp1 =orderedList.front();      orderedList.remove(orderedList.begin());
-               BinaryNode<Pair<float,string>>* tmp2 =orderedList.front();      orderedList.remove(orderedList.begin());
-               BinaryNode<Pair<float,string>>* node = 
-               new BinaryNode<Pair<float,string>>(
+               BinaryNode<Pair<float,string> >* tmp1 =orderedList.front();      orderedList.remove(orderedList.begin());
+               BinaryNode<Pair<float,string> >* tmp2 =orderedList.front();      orderedList.remove(orderedList.begin());
+               BinaryNode<Pair<float,string> >* node = 
+               new BinaryNode<Pair<float,string> >(
                      Pair<float,string>(tmp1->data.first +tmp2->data.first,tmpStr)
                      );
                node->addLeft(tmp1);
@@ -55,10 +55,10 @@ class huff
          readTree(orderedList.front(),"");
       }
 
-      ListIterator<BinaryNode<Pair<float,string>>*> insertOrdered(BinaryNode<Pair<float,string>>* item){
+      ListIterator<BinaryNode<Pair<float,string> >*> insertOrdered(BinaryNode<Pair<float,string> >* item){
             return insertOrdered(orderedList.begin(),item);
       }
-      ListIterator<BinaryNode<Pair<float,string>>*> insertOrdered(ListIterator<BinaryNode<Pair<float,string>>*> it,BinaryNode<Pair<float,string>>* item) 
+      ListIterator<BinaryNode<Pair<float,string> >*> insertOrdered(ListIterator<BinaryNode<Pair<float,string> >*> it,BinaryNode<Pair<float,string> >* item) 
       {
             if(
                !(
@@ -71,10 +71,10 @@ class huff
                   return insertOrdered(it,item);
             }
       }
-      ListIterator<BinaryNode<Pair<float,string>>*> rInsertOrdered(BinaryNode<Pair<float,string>>* item){
+      ListIterator<BinaryNode<Pair<float,string> >*> rInsertOrdered(BinaryNode<Pair<float,string> >* item){
             return rInsertOrdered(orderedList.rbegin(),item);
       }
-      ListIterator<BinaryNode<Pair<float,string>>*> rInsertOrdered(ListIterator<BinaryNode<Pair<float,string>>*> it,BinaryNode<Pair<float,string>>* item)
+      ListIterator<BinaryNode<Pair<float,string> >*> rInsertOrdered(ListIterator<BinaryNode<Pair<float,string> >*> it,BinaryNode<Pair<float,string> >* item)
       {
             if(!(it != NULL)  || item >= *it){
                   it++;
@@ -134,14 +134,14 @@ ostream & operator << (ostream & out, List <T> & rhs)
 // class huff
 // {
 //    private:
-//       BinaryNode<pair<float,string>>* bHead;
-//       List<BinaryNode<pair<float,string>>*> orderedList;
+//       BinaryNode<pair<float,string> >* bHead;
+//       List<BinaryNode<pair<float,string> >*> orderedList;
 //       // pair<string,int> keys[];
 //    public:
 //       huff():bHead(NULL){}
-//       huff(BinaryNode<pair<float,string>>* bNode):bHead(bNode){}
+//       huff(BinaryNode<pair<float,string> >* bNode):bHead(bNode){}
       
-//       void addNode(BinaryNode<pair<float,string>> bNode){}
+//       void addNode(BinaryNode<pair<float,string> > bNode){}
 //       void getKey(){}
 // };
 

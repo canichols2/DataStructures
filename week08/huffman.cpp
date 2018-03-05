@@ -37,7 +37,7 @@ void huffman(string fileName)
    // List<Pair<float,string> > sortedThings = List<Pair<float,string> >();
    float tmpF;
    string tmpS;
-   ifstream file(fileName);
+   ifstream file(fileName.c_str());
    while(file>>tmpS>>tmpF)
    {
       //I created a new insert to sort as it's inserting.

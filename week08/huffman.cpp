@@ -33,7 +33,7 @@ void huffman(string fileName)
    {
       //I created a new insert to sort as it's inserting.
       huffObj.rInsertOrdered( new BinaryNode<Pair<float,string> >(  Pair<float,string>(tmpF,tmpS))  );
-      cout << huffObj <<endl;
+      // cout << huffObj <<endl;
       
    }
    

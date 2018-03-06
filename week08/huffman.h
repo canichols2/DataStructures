@@ -45,7 +45,7 @@ class huff
 		  return out;
 	  }
       void createTree(){
-         cerr << "Creating Tree"<<endl; 
+         // cerr << "Creating Tree"<<endl; 
          while (orderedList.size() > 1)
          {
                string tmpStr = "";
@@ -58,7 +58,7 @@ class huff
                node->addLeft(tmp1);
                node->addRight(tmp2);
                rInsertOrdered(node);
-               cout << *this<<endl;
+               // cout << *this<<endl;
          }
       }
       void readTree()

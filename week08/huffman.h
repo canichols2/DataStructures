@@ -3,9 +3,10 @@
  *    Week 08, Huffman
  *    Brother Helfrich, CS 235
  * Author:
- *    Br. Helfrich
+ *    Cody Nichols
  * Summary:
- *    This program will implement the huffman() function
+ *    This program will implement the huffman( huff ) class
+ *    and gives the prototype of the huffman function
  ************************************************************************/
 #include <string>
 #include "bnode.h"
@@ -29,7 +30,6 @@ class huff
                readTree(node->pLeft,huffStr +"0");
                readTree(node->pRight,huffStr +"1");
             }else{
-               // cout << node->data.second << " = " << huffStr<<endl;
                endList.insertOrdered( Pair<string,string>(node->data.second,huffStr));
             }
          }
@@ -45,7 +45,6 @@ class huff
 		  return out;
 	  }
       void createTree(){
-         // cerr << "Creating Tree"<<endl; 
          while (orderedList.size() > 1)
          {
                string tmpStr = "";
@@ -58,7 +57,6 @@ class huff
                node->addLeft(tmp1);
                node->addRight(tmp2);
                rInsertOrdered(node);
-               // cout << *this<<endl;
          }
       }
       void readTree()
@@ -114,48 +112,14 @@ class huff
 
 
 
-
-
-
-
-
 //Temporary non-member functions to output BinaryNode and Pair
 
 template <class T>
 ostream & operator << (ostream & out, BinaryNode<T>* & rhs){
-   // "  { D:{lBN}{rBN} }  ";
-   // out << "{"<<rhs->data<<":"<<rhs->pLeft<<":"<<rhs->pRight<<" ";
    if(rhs != NULL)
       out <<rhs->pLeft<<rhs->data<<" "<<rhs->pRight;
    return out;
 }
 
-
-/*****************************************
- * LIST :: DISPLAY
- * Display the contents of the list forwards
- ****************************************/
-
-// ostream & operator << (ostream & out, List<BinaryNode<Pair<float, string> >*> & rhs)
-// {
-//    out << '{';
-//    ListIterator <BinaryNode<Pair<float,string > >*> it;
-//    for (it = rhs.begin(); it != rhs.end(); ++it)
-//       out << "  " << (*it)->data;
-//    out << "  }";
-
-//    return out;   
-// }
-
-//
-//ostream & operator << (ostream & out, huff & rhs){
-//   out << "Huff Ordered List: ";
-//   out << '{';
-//   ListIterator <BinaryNode<Pair<float,string > >*> it;
-//   for (it = rhs.orderedList.begin(); it != rhs.orderedList.end(); ++it)
-//      out << "  " << (*it)->data;
-//   out << "  }";
-//   return out;
-//}
 
 #endif // HUFFMAN_h

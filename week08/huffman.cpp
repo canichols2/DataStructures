@@ -14,10 +14,7 @@
 #include <fstream>
 #include "huffman.h"       // for HUFFMAN() prototype
 using namespace std;
-void readTree(BinaryNode<Pair<float,string> >* node,string huffStr);
-// template <class T>
-// ostream & operator << (ostream & out, const BinaryNode <Pair<float,string> >* & rhs);
-// ostream & operator << (ostream & out, const Pair<float,string> & rhs);
+// void readTree(BinaryNode<Pair<float,string> >* node,string huffStr);
 
 /*******************************************
  * HUFFMAN
@@ -31,17 +28,10 @@ void huffman(string fileName)
    ifstream file(fileName.c_str());
    while(file>>tmpS>>tmpF)
    {
-      //I created a new insert to sort as it's inserting.
       huffObj.rInsertOrdered( new BinaryNode<Pair<float,string> >(  Pair<float,string>(tmpF,tmpS))  );
-      // cout << huffObj <<endl;
-      
    }
-   
-   //TODO Call huffObj. Create Tree...
    huffObj.createTree();
-
    huffObj.readTree();
-//    readTree(sortedNodes.front(),"");
 
    return;
 }

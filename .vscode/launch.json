@@ -5,6 +5,29 @@
    "version": "0.2.0",
    "configurations": [
       {
+         "name": "Week09",
+         "type": "cppdbg",
+         "request": "launch",
+         "program": "${workspaceFolder}/week09/test.exe",
+         "args": [],
+         "stopAtEntry": false,
+         "cwd": "${workspaceFolder}/week09",
+         "environment": [],
+         "externalConsole": true,
+         "MIMode": "gdb",
+         "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
+         "setupCommands": [
+            {
+               "console": "integratedTerminal",
+               "description": "Enable pretty-printing for gdb",
+               "text": "-enable-pretty-printing",
+               "ignoreFailures": true
+            }
+         ],
+         "preLaunchTask": "buildCppW9",
+         "internalConsoleOptions": "openOnFirstSessionStart"
+      },
+      {
          "name": "Week08",
          "type": "cppdbg",
          "request": "launch",
@@ -27,6 +50,7 @@
          "preLaunchTask": "buildCppW8",
          "internalConsoleOptions": "openOnFirstSessionStart"
       },
+      {
       "name": "Week07",
       "type": "cppdbg",
       "request": "launch",

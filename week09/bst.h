@@ -19,6 +19,25 @@
 // forward declaration for the BST iterator
 template <class T>
 class BSTIterator; 
+/*********************************************************
+ * CopyFunction
+ * *******************************************************/
+template <class T>
+BinaryNode<T>* copyNode(BinaryNode <T> * ptr)
+{
+   if(ptr)
+   {
+      //copy data
+      BinaryNode<T>* node = new BinaryNode<T>(ptr->data);
+      //copy right node
+      node->pRight = copyNode(ptr->pRight);
+      //copy left node
+      node->pLeft = copyNode(ptr->pLeft);
+      return node;
+   }
+   else
+      return 0;
+}
 
 /*****************************************************************
  * BINARY SEARCH TREE
@@ -42,19 +61,32 @@ public:
    // determine if the tree is empty
    bool empty() const
    {
-
+      if(root != 0)
+         return false;
+      else
+         return true;
    }
 
    // remove all the nodes from the tree.  Makes an empty tree.
    void clear()
    {
-      
+      clear(root);
+   }
+   void clear(BinaryNode<T>* ptr)
+   {
+      if(ptr)
+      {
+         clear(ptr->pLeft);
+         clear(ptr->pRight);
+         delete ptr;
+      }
    }
 
    // overloaded assignment operator
    BST & operator = (const BST & rhs) throw (const char *)
    {
-
+      this->clear();
+      this->root = copyNode(rhs.root);
    }
       
    // insert an item
@@ -77,13 +109,15 @@ private:
    BinaryNode <T> * root;
 };
 
+
+
 /*********************************************************
 * copy constructor
 **********************************************************/
 template <class T>
 BST<T>::BST(const BST &rhs)
 {
-   
+   this->root = copyNode(rhs.root);
 }
 
 /*****************************************************
@@ -92,7 +126,7 @@ BST<T>::BST(const BST &rhs)
 template <class T>
 BST<T>::~BST()
 {
-   
+   clear(this->root);
 }
 
 
@@ -137,7 +171,34 @@ BSTIterator <T> BST <T> :: rbegin() const
 template <class T>
 void BST <T> :: insert(const T & t) throw (const char *)
 {
-   
+   if(root == NULL)
+   {
+      root = new BinaryNode<T>(t);
+      return;
+   }
+   BinaryNode<T>* ptr=root;
+   while(ptr)
+   {
+      if(t < ptr->data)
+      {
+         if(ptr->pLeft == NULL)
+         {
+            ptr->pLeft = new BinaryNode<T>(t,ptr);
+            return;
+         }
+         ptr = ptr->pLeft;
+      }
+      else if(t > ptr->data)
+      {
+         if(ptr->pRight == NULL)
+         {
+            ptr->pRight = new BinaryNode<T>(t,ptr);
+            return;
+         }
+         ptr = ptr->pRight;
+      }
+         
+   }
 }
 
 /*************************************************
@@ -147,7 +208,47 @@ void BST <T> :: insert(const T & t) throw (const char *)
 template <class T>
 void BST <T> :: remove(BSTIterator <T> & it)
 {
+   BinaryNode<T>*ptr = it.getNode();
+   if(ptr)
+   if(ptr->pRight && ptr->pLeft)
+   {
+      //2 Child delete
+      //Can't this be done with just it++ and then it.getNode()????????
+      BinaryNode<T>*nsn = ptr->pRight;
+      while(nsn->pLeft)
+      {
+         nsn = nsn->pLeft;
+      }
+      ptr->data = nsn->data;
+      remove(++it);
 
+   }
+   else if(ptr->pRight || ptr->pLeft)
+   {
+      BinaryNode<T>* nbn;
+      if(ptr->pRight)
+         nbn = ptr->pRight;
+      else
+         nbn = ptr->pLeft;
+      //1 Child delete
+      if(ptr->data > ptr->pParent->data)
+      {
+         ptr->pParent->addRight(nbn);
+      }
+      else
+      {
+         ptr->pParent->addLeft(nbn);
+      }
+   }
+   else
+   {
+      //No Child Delete
+      if(ptr->data > ptr->pParent->data)
+         ptr->pParent->pRight = NULL;
+      else
+         ptr->pParent->pLeft = NULL;
+   }
+   delete ptr;
 }
 
 /****************************************************
@@ -157,6 +258,20 @@ void BST <T> :: remove(BSTIterator <T> & it)
 template <class T>
 BSTIterator <T> BST <T> :: find(const T & t)
 {
+   // BSTIterator<T> it;
+   BinaryNode<T>* ptr = root;
+   while (ptr)
+   {
+      if(t > ptr->data)
+      {
+         ptr = ptr->pRight;
+      }
+      else if(t < ptr->data)
+         ptr = ptr->pLeft;
+      else if(t == ptr->data)
+         return BSTIterator<T>(ptr);
+   }
+   return BSTIterator<T>();
 
 }
 

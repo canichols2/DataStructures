@@ -5,11 +5,17 @@
   "version": "2.0.0",
   "tasks": [
    {
-     "label": "buildCppW8",
-     "type": "shell",
-     //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
-     "command": "pwd;g++ -g -o ./week08/test.exe ./week08/week08.cpp ./week08/huffman.cpp"
-   },
+      "label": "buildCppW9",
+      "type": "shell",
+      //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
+      "command": "pwd;g++ -g -o ./week09/test.exe ./week09/week09.cpp"
+    },
+    {
+       "label": "buildCppW8",
+       "type": "shell",
+       //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
+       "command": "pwd;g++ -g -o ./week08/test.exe ./week08/week08.cpp ./week08/huffman.cpp"
+     },
    {
      "label": "buildCppW7",
      "type": "shell",

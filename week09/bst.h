@@ -72,13 +72,14 @@ public:
    {
       clear(root);
    }
-   void clear(BinaryNode<T>* ptr)
+   void clear(BinaryNode<T>* &ptr)
    {
       if(ptr)
       {
          clear(ptr->pLeft);
          clear(ptr->pRight);
          delete ptr;
+         ptr = 0;
       }
    }
 

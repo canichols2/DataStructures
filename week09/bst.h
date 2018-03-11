@@ -239,6 +239,7 @@ void BST <T> :: remove(BSTIterator <T> & it)
       else
       {
          ptr->pParent->addLeft(nbn);
+   delete ptr;
       }
    }
    else
@@ -248,8 +249,9 @@ void BST <T> :: remove(BSTIterator <T> & it)
          ptr->pParent->pRight = NULL;
       else
          ptr->pParent->pLeft = NULL;
-   }
    delete ptr;
+   
+   }
 }
 
 /****************************************************

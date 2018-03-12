@@ -20,6 +20,17 @@
 template <class T>
 void sortBinary(T array[], int num)
 {
+   BST<T> tree;
+   for(int i = 0; i < num;i++)
+   {
+      tree.insert(array[i]);
+   }
+   BSTIterator<T> it = tree.begin();
+   for(int i = 0;it != tree.end();i++,it++)
+   {
+      array[i] = *it;
+   }
+   tree.clear();
 }
 
 

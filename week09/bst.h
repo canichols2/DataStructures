@@ -180,7 +180,7 @@ void BST <T> :: insert(const T & t) throw (const char *)
    BinaryNode<T>* ptr=root;
    while(ptr)
    {
-      if(t < ptr->data)
+      if(t <= ptr->data)
       {
          if(ptr->pLeft == NULL)
          {

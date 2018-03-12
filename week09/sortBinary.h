@@ -33,5 +33,4 @@ void sortBinary(T array[], int num)
    tree.clear();
 }
 
-
 #endif // SORT_BINARY_H

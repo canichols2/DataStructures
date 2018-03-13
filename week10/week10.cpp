@@ -84,7 +84,7 @@ string sanatize(string word)
 {
    //remove punctuation
    string clean;
-   string punc = "!:';()#.$,/\"";
+   string punc = "!:?';()#.$,/\"";
    for(string::iterator it = word.begin();it != word.end();it++)
    {
        string::iterator found = find(punc.begin(),punc.end(),(*it));

@@ -25,7 +25,10 @@
    "fstream": "cpp",
    "utility": "cpp",
    "xmemory0": "cpp",
-   "type_traits": "cpp"
+   "type_traits": "cpp",
+   "tuple": "cpp",
+   "algorithm": "cpp",
+   "xtree": "cpp"
 },
 "editor.tabSize": 3,
 

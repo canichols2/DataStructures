@@ -22,6 +22,7 @@ string sanatize(string);
 int main()
 {
    string fileName;
+   int wordcount;
    map<string,int> WordMap;
    
 
@@ -34,6 +35,7 @@ int main()
       word = sanatize(word);
       if(word != "")
       {
+         wordcount++;
          map<string,int>::iterator it = WordMap.find(word);
          if(it != WordMap.end())
          {//Key already exists.
@@ -60,12 +62,15 @@ int main()
       words.insert(make_pair(it->second,it->first));
    }
 
+   cout << endl<< "Number of words processed: " << wordcount<<endl;;
+   cout << "100 most common words found and their frequencies:"<<endl;
+
    //Display top 100 values.
    BSTIterator<pair<int,string> > it = words.rbegin();
    for (int i = 0;i<100;i++)
    {
       if(it != NULL)
-         cout << setw(23) << (*it).second <<" = " << (*it).first << endl;
+         cout << setw(23) << (*it).second <<" - " << (*it).first << endl;
       --it;
    }
 

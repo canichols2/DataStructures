@@ -3,7 +3,7 @@
 #     Week 11, Sorts
 #     Brother Ercanbrack, CS235
 # Author:
-#
+#		Cody Nichols
 # Summary:
 #     This program will complete a heap merge and merge sort 
 #     on files filled with intergers.

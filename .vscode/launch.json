@@ -9,7 +9,7 @@
          "type": "cppdbg",
          "request": "launch",
          "program": "${workspaceFolder}/week11/test.exe",
-         "args": [],
+         "args": ["merge","week11_test2.in"],
          "stopAtEntry": false,
          "cwd": "${workspaceFolder}/week11",
          "environment": [],

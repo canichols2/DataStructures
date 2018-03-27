@@ -127,7 +127,7 @@ void splitList(list< list<T> > &data, list< list<T> > &l1, list< list<T> > &l2)
 	l1.clear();
 	l2.clear();
 	list< list<T> > *listPtr = &l1;
-	for(list< list<int>>::iterator it = data.begin();
+	for(list< list<int> >::iterator it = data.begin();
 			it != data.end();
 			++it)
 	{
@@ -145,8 +145,8 @@ void splitList(list< list<T> > &data, list< list<T> > &l1, list< list<T> > &l2)
 template<class T>
 void mergeList(list< list<T> > &data, list< list<T> > &l1, list< list<T> > &l2)
 {
-	list< list<int>>::iterator itL1 = l1.begin();
-	list< list<int>>::iterator itL2 = l2.begin();
+	list< list<int> >::iterator itL1 = l1.begin();
+	list< list<int> >::iterator itL2 = l2.begin();
 	while(itL1 != l1.end() && itL2 != l2.end() )
 	{
       int dSize = data.size();

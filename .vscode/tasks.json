@@ -5,11 +5,16 @@
   "version": "2.0.0",
   "tasks": [
    {
-      "label": "buildCppW11",
+      "label": "buildCppW12",
       "type": "shell",
-      //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
-      "command": "pwd;g++ -g -o ./week11/test.exe ./week11/week11.cpp"
+      "command": "pwd;g++ -g -o ./week12/test.exe ./week12/spellCheck.cpp ./week12/week12.cpp"
     },
+    {
+       "label": "buildCppW11",
+       "type": "shell",
+       //  "command": "cd pwd/week02;g++ -g ./week*.cpp ./infix.cpp -o a.exe"
+       "command": "pwd;g++ -g -o ./week11/test.exe ./week11/week11.cpp"
+     },
     {
        "label": "buildCppW10",
        "type": "shell",

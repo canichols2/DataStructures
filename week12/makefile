@@ -1,9 +1,9 @@
 ###############################################################
 # Program:
 #     Week 12, Hash
-#     Brother XXXXX, CS235
+#     Brother Ercanbrack, CS235
 # Author:
-#     <your name here>
+#     Cody Nichols
 # Summary:
 #     <put a description here>
 ###############################################################

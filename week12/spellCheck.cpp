@@ -74,10 +74,18 @@ void spellCheck()
    while(pass >> word)
    {
       string data = word;
-      transform(data.begin(), data.end(), data.begin(), ::tolower);
+      for(int i =0; i < data.length(); i++)
+      {
+         data[i] = tolower(data[i]);
+         data[i];
+         // it.tolower();
+      }
+      
+      // transform(data.begin(), data.end(), data.begin(), ::tolower);
       if(!SH.find(data))
       {
-         misspelled.insert(word);
+         if(misspelled.find(word) == NULL)
+            misspelled.insert(word);
       }
    }
    if(misspelled.size() == 0)

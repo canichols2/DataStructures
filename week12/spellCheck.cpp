@@ -63,7 +63,7 @@ void spellCheck()
    {
       SH.insert(word);
    }
-   SH.display();   
+   // SH.display();   
 
    string filename;
    cout << "What file do you want to check?\n";

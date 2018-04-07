@@ -38,10 +38,10 @@ class Person : public Printable
       if(*this == rhs || *this < rhs)
          return true;
       return false;
-   };
+   }
    bool operator==(Person &rhs){return (surName == rhs.surName && givenName == rhs.givenName &&  atoi(year.c_str()) == atoi(rhs.year.c_str()) && intMonth() == rhs.intMonth() &&  atoi(day.c_str()) == atoi(rhs.day.c_str()));};
-   bool operator>=(Person &rhs){return !(*this < rhs);  };
-   bool operator!=(Person &rhs){return !(*this == rhs); };
+   bool operator>=(Person &rhs){return !(*this < rhs);  }
+   bool operator!=(Person &rhs){return !(*this == rhs); }
    bool  operator<(Person &rhs){
       if(surName < rhs.surName)
          return true;
@@ -53,8 +53,8 @@ class Person : public Printable
          return true;
       if(surName == rhs.surName && givenName == rhs.givenName &&  atoi(year.c_str()) == atoi(rhs.year.c_str()) && intMonth() == rhs.intMonth() &&  atoi(day.c_str()) < atoi(rhs.day.c_str()))
          return true;
-   };
-   bool  operator>(Person &rhs){return!(*this < rhs) && !(*this == rhs);};
+   }
+   bool  operator>(Person &rhs){return!(*this < rhs) && !(*this == rhs);}
 
    //External Declaration
    string toString();

@@ -31,7 +31,8 @@
    "xtree": "cpp",
    "vector": "cpp",
    "list": "cpp",
-   "map": "cpp"
+   "map": "cpp",
+   "xtr1common": "cpp"
 },
 "editor.tabSize": 3,
 

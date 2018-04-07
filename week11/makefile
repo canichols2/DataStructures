@@ -3,18 +3,18 @@
 #     Week 11, Sorts
 #     Brother Ercanbrack, CS235
 # Author:
-#
+#		Cody Nichols
 # Summary:
 #     This program will complete a heap merge and merge sort 
 #     on files filled with intergers.
 # Time:
-#     How long did it take 
+#     ~4 Hours
 ###############################################################
 
 ##############################################################
 # The main rule
 ##############################################################
-a.out: week11.o
+a.out: week11.o makefile
 	g++ -o a.out week11.o 
 	tar -cf week11.tar *.h *.cpp makefile
 

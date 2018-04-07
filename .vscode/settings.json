@@ -28,7 +28,11 @@
    "type_traits": "cpp",
    "tuple": "cpp",
    "algorithm": "cpp",
-   "xtree": "cpp"
+   "xtree": "cpp",
+   "vector": "cpp",
+   "list": "cpp",
+   "map": "cpp",
+   "xtr1common": "cpp"
 },
 "editor.tabSize": 3,
 

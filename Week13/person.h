@@ -1,5 +1,10 @@
+#ifndef prsn
+#define prsn
+
+#include <stdio.h>
 #include "interfaces.h"
 #include "deque.h"
+#include "list.h"
 #include <string>
 using namespace std;
 
@@ -12,6 +17,7 @@ class Person : public Printable
    public:
    Person(int gen=1):generation(gen){}
    ~Person(){}
+   tm birthdate;
    string year;
    string month;
    string day;
@@ -19,7 +25,18 @@ class Person : public Printable
    string surName;
    int generation;
    Deque<Person> parents;
+   void setDate(string date)
+   {
+      tm tim;
+      char loc_month[10];
+      sscanf(date.c_str(), "%d %s %d",&tim.tm_mday,loc_month,&tim.tm_year);
+      tim.tm_mon = intMonth(loc_month);
+      birthdate = tim;
+   }
    int intMonth(){
+      return intMonth(this->month);
+   }
+   int intMonth(string month){
       if(month == "JAN") return 1;
       if(month == "FEB") return 2;
       if(month == "MAR") return 3;
@@ -39,7 +56,7 @@ class Person : public Printable
          return true;
       return false;
    }
-   bool operator==(Person &rhs){return (surName == rhs.surName && givenName == rhs.givenName &&  atoi(year.c_str()) == atoi(rhs.year.c_str()) && intMonth() == rhs.intMonth() &&  atoi(day.c_str()) == atoi(rhs.day.c_str()));};
+   bool operator==(Person &rhs){return (surName == rhs.surName && givenName == rhs.givenName &&  birthdate.tm_year == rhs.birthdate.tm_year && birthdate.tm_mon == rhs.birthdate.tm_mon &&  birthdate.tm_mday == rhs.birthdate.tm_mday);};
    bool operator>=(Person &rhs){return !(*this < rhs);  }
    bool operator!=(Person &rhs){return !(*this == rhs); }
    bool  operator<(Person &rhs){
@@ -47,14 +64,15 @@ class Person : public Printable
          return true;
       if(surName == rhs.surName && givenName < rhs.givenName)
          return true;
-      if(surName == rhs.surName && givenName == rhs.givenName &&  atoi(year.c_str()) == atoi(rhs.year.c_str()))
+      if(surName == rhs.surName && givenName == rhs.givenName &&  birthdate.tm_year < rhs.birthdate.tm_year)
          return true;
-      if(surName == rhs.surName && givenName == rhs.givenName &&  atoi(year.c_str()) == atoi(rhs.year.c_str()) && intMonth() < rhs.intMonth())
+      if(surName == rhs.surName && givenName == rhs.givenName &&  birthdate.tm_year == rhs.birthdate.tm_year && birthdate.tm_mon < rhs.birthdate.tm_mon)
          return true;
-      if(surName == rhs.surName && givenName == rhs.givenName &&  atoi(year.c_str()) == atoi(rhs.year.c_str()) && intMonth() == rhs.intMonth() &&  atoi(day.c_str()) < atoi(rhs.day.c_str()))
+      if(surName == rhs.surName && givenName == rhs.givenName &&  birthdate.tm_year == rhs.birthdate.tm_year && birthdate.tm_mon == rhs.birthdate.tm_mon &&  birthdate.tm_mday < rhs.birthdate.tm_mday)
          return true;
+      return false;
    }
-   bool  operator>(Person &rhs){return!(*this < rhs) && !(*this == rhs);}
+   bool  operator>(Person &rhs){return !(*this < rhs) && !(*this == rhs);}
 
    //External Declaration
    string toString();
@@ -98,4 +116,24 @@ class ParentLevel:public Printable
       else if(level == 7)  output = "5th Great Grandparents:";
       return output;
    }
-}
+};
+
+class FamilyUnit
+{
+   public:
+   List<int> Parents;
+   List<int> Children;
+   FamilyUnit(){
+      Parents = List<int>();
+      Children = List<int>();
+   }
+   ~FamilyUnit(){}
+   void addParent(int p){
+      Parents.push_back(p);
+   }
+   void addChild(int c){
+      Children.push_back(c);
+   }
+      
+};
+#endif //prsn

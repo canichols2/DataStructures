@@ -155,7 +155,7 @@ class Person
    bool strLT(string str1, string str2) const
    {
 
-      return strcmpi (str1.c_str() , str2.c_str()) < 0;
+      return strcasecmp (str1.c_str() , str2.c_str()) < 0;
       if (strExist(str1) && strExist(str2))
          if(str1 < str2)
             return true;

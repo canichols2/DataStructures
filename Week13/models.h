@@ -1,6 +1,7 @@
 #ifndef prsn
 #define prsn
 
+#include <cstring>
 #include <stdio.h>
 #include "interfaces.h"
 #include "deque.h"

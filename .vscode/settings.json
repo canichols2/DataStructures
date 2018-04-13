@@ -32,7 +32,8 @@
    "vector": "cpp",
    "list": "cpp",
    "map": "cpp",
-   "xtr1common": "cpp"
+   "xtr1common": "cpp",
+   "streambuf": "cpp"
 },
 "editor.tabSize": 3,
 

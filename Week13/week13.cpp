@@ -10,6 +10,7 @@
 #include "interfaces.h"
 #include "bst.h"
 #include "vector.h"
+#include "helpers.h"
 #include <iostream>
 #include <fstream>
 // #include <ifstream>
@@ -19,6 +20,7 @@ int extractInt(string str);
 
 int main(int argc, char const *argv[])
 {
+
    Person     *PersonPointer;
    FamilyUnit *FamilyPointer;
    // Vector<FamilyUnit> FAMS = Vector<FamilyUnit>(100);
@@ -28,6 +30,8 @@ int main(int argc, char const *argv[])
    int lastPerson;
    int lastFamily;
    BST<fakePointer<Person> > orderedPeople;
+
+   //Get Filename
    char filename[50];
    if(argc)
    {
@@ -40,6 +44,9 @@ int main(int argc, char const *argv[])
       cin >> filename;
    }
 
+
+   //Open GED file
+   //Read in values
    try
    {
       ifstream file(filename);
@@ -53,6 +60,7 @@ int main(int argc, char const *argv[])
       {
          // string data = 
          getline(file,data);
+         trim(data);
          switch (level)
          {
          case 0:
@@ -90,14 +98,15 @@ int main(int argc, char const *argv[])
                if(firstLevelType == "NAME")
                {
                   if(secondLevelType == "GIVN")
-                     PersonPointer->givenName = data;
+                     PersonPointer->givenName = (data);
                   if(secondLevelType == "SURN")
-                     PersonPointer->surName = data;
+                     PersonPointer->surName = (data);
                }
                if(firstLevelType == "BIRT")
                {
                   if(secondLevelType == "DATE")
                   {
+                     //FIXME: fix SetDate function for dates without month/day
                      PersonPointer->setDate(data);
                   }
                }
@@ -117,17 +126,31 @@ int main(int argc, char const *argv[])
             break;
          }
       }
+      file.close();
+   //END Open GED file
+   //Read in values
+
+
+
+
       ofstream outFile;
       outFile.open("sorted.dat ");
+
       //add vector of persons to ordered list (bst?)
       for(int i = 1;i <= lastPerson;  i++)
       {
-         if(true/*For checking if vector actually has an object*/)
+         fakePointer<Person> fPPer = fakePointer<Person>(INDI[i]);
+         if(personExits( *(fPPer.obj) )/*TODO: Check if vector actually has an object*/)
          {
-            orderedPeople.insert( fakePointer<Person>(INDI[i]) );
+            orderedPeople.insert( fPPer );
          }
       }
+
       
+
+
+
+      //Write Ordered to outfile
       for(
          BSTIterator<fakePointer<Person> > it = orderedPeople.begin();
          it != orderedPeople.end();
@@ -141,57 +164,57 @@ int main(int argc, char const *argv[])
 
 
       Deque<Person> pDeck;
-      int curGen;
+      int curGen = -1;
 
       INDI[1].generation = 0;
       pDeck.push_back( INDI[1] );
+         /* // temp output */ //ofstream outFile2; outFile2.open("pedigree.txt");
 
        while (!pDeck.empty() )
        {
           fakePointer<Person> curPer = pDeck.front();
          int curFamIndex = (*curPer).familyIndex;
          //Output
-         /* // temp output */ ofstream outFile2; outFile2.open("pedigree.txt");
          switch((*curPer).generation)
          {
             case 0:
-               outFile2 << "The Ancestors of " << (*curPer).givenName << " " << (*curPer).surName << ":\n";
+               cout << "The Ancestors of " << (*curPer).givenName << " " << (*curPer).surName << ":\n";
                break;
             case 1:
                if ((*curPer).generation != curGen)
-                  outFile2 << "Parents:\n";
+                  cout << "Parents:\n";
                break;
             case 2:
                if ((*curPer).generation != curGen)
-                  outFile2 << "Grandarents:\n";
+                  cout << "Grandarents:\n";
                break;
             case 3:
                if ((*curPer).generation != curGen)
-                  outFile2 << "Great Grandarents:\n";
+                  cout << "Great Grandarents:\n";
                break;
             case 4:
                if ((*curPer).generation != curGen)
-                  outFile2 << "2nd Great Grandarents:\n";
+                  cout << "2nd Great Grandarents:\n";
                break;
             case 5:
                if ((*curPer).generation != curGen)
-                  outFile2 << "3rd Great Grandarents:\n";
+                  cout << "3rd Great Grandarents:\n";
                break;
             case 6:
                if ((*curPer).generation != curGen)
-                  outFile2 << "4th Great Grandarents:\n";
+                  cout << "4th Great Grandarents:\n";
                break;
             case 7:
                if ((*curPer).generation != curGen)
-                  outFile2 << "5th Great Grandarents:\n";
+                  cout << "5th Great Grandarents:\n";
                break;
                
          }
-         outFile2 << "\t\t"<< *curPer << endl;
-         outFile2.close();
          //End Output
 
           curGen = (*curPer).generation;
+         if(curGen != 0)
+            cout << "\t"<< *curPer << endl;
          if(curFamIndex >= 0)
          {
             FamilyUnit *family = &(FAMS[curFamIndex]);
@@ -203,9 +226,10 @@ int main(int argc, char const *argv[])
                curPar++;
             } 
          }
-          pDeck.pop_front();
+         pDeck.pop_front();
 
        }
+         // outFile2.close();
 
    }
    catch (const std::exception&)
